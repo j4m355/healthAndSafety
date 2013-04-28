@@ -572,7 +572,10 @@ window.require.register("views/contact-view", function(exports, require, module)
     };
 
     ContactView.prototype.postMessage = function() {
-      if (validate()) {
+      var valid;
+      valid = validate();
+      console.log("valid?  " + valid);
+      if (valid) {
         $('#contactError').hide();
         showSuccessAlert("<p> <strong>Thank you for your message we will be in touch soon. </strong>Please check your junk mail just in case.</P>");
         return $.ajax({
@@ -832,10 +835,14 @@ window.require.register("views/home-page-view", function(exports, require, modul
   Spinner = components('spin.js');
 
   module.exports = HomePageView = (function(_super) {
+    var showErrorAlert, showSuccessAlert, validate, validatePostcode,
+      _this = this;
 
     __extends(HomePageView, _super);
 
     function HomePageView() {
+      this.closeLoginErrorAlert = __bind(this.closeLoginErrorAlert, this);
+      this.closeLoginSuccsesAlert = __bind(this.closeLoginSuccsesAlert, this);
       this.postcodeSearch = __bind(this.postcodeSearch, this);
       this.render = __bind(this.render, this);
       this.initialize = __bind(this.initialize, this);
@@ -863,24 +870,73 @@ window.require.register("views/home-page-view", function(exports, require, modul
     };
 
     HomePageView.prototype.postcodeSearch = function(e) {
+      var postcode, valid;
       if (e.keyCode === 13) {
-        return $.ajax({
-          url: "/api/postcode",
-          type: "post",
-          data: $('#postcodeBox').serialize(),
-          success: function(jqXhr, textStatus) {
-            return console.log(jqXhr);
-          },
-          error: function() {
-            return console.log("error");
-          }
-        });
+        postcode = $('#postcodeBox').val();
+        valid = validate(postcode);
+        if (valid) {
+          return $.ajax({
+            url: "/api/postcode",
+            type: "post",
+            data: $('#postcodeBox').serialize(),
+            success: function(jqXhr, textStatus) {
+              return console.log(jqXhr);
+            },
+            error: function() {
+              return console.log("error");
+            }
+          });
+        }
+      }
+    };
+
+    validate = function(postcode) {
+      var errors;
+      errors = [];
+      if (postcode.length < 1 || !validatePostcode(postcode)) {
+        errors.push("Please use a valid postcode");
+      }
+      if (errors.length > 0) {
+        showErrorAlert(errors);
+        return false;
+      } else {
+        return true;
+      }
+    };
+
+    HomePageView.prototype.closeLoginSuccsesAlert = function() {
+      return this.$('#loginSuccsesAlert').hide();
+    };
+
+    HomePageView.prototype.closeLoginErrorAlert = function() {
+      return this.$('#loginErrorAlert').hide();
+    };
+
+    showSuccessAlert = function(message) {
+      $('#successMessage').html(message);
+      return $('#loginSuccsesAlert').show();
+    };
+
+    showErrorAlert = function(message) {
+      $('#errorMessage').html(message);
+      return $('#loginErrorAlert').show();
+    };
+
+    validatePostcode = function(postcode) {
+      var belfastPostcode, postcodeRegEx;
+      console.log(postcode);
+      postcodeRegEx = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})$/;
+      belfastPostcode = /^([Bb][Tt])/;
+      if (belfastPostcode.test(postcode)) {
+        return postcodeRegEx.test(postcode);
+      } else {
+        return false;
       }
     };
 
     return HomePageView;
 
-  })(View);
+  }).call(this, View);
   
 });
 window.require.register("views/prices-view", function(exports, require, module) {
