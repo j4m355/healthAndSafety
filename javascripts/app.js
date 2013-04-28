@@ -840,7 +840,7 @@ window.require.register("views/header-view", function(exports, require, module) 
   
 });
 window.require.register("views/home-page-view", function(exports, require, module) {
-  var CarouselView, HomePageView, Spinner, View, mediator, template,
+  var CarouselView, HomePageView, View, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -850,8 +850,6 @@ window.require.register("views/home-page-view", function(exports, require, modul
   View = require('views/base/view');
 
   mediator = require('mediator');
-
-  Spinner = components('spin.js');
 
   CarouselView = require('./carousel-view');
 
@@ -930,7 +928,7 @@ window.require.register("views/prices-view", function(exports, require, module) 
   
 });
 window.require.register("views/quickQuote-view", function(exports, require, module) {
-  var CarouselView, QuickQuoteView, View, mediator, template,
+  var QuickQuoteView, View, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -941,8 +939,6 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
 
   mediator = require('mediator');
 
-  CarouselView = require('./carousel-view');
-
   module.exports = QuickQuoteView = (function(_super) {
     var inBounds, outOfBounds, showErrorAlert,
       _this = this;
@@ -951,7 +947,6 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
 
     function QuickQuoteView() {
       this.closeLoginErrorAlert = __bind(this.closeLoginErrorAlert, this);
-      this.goBack = __bind(this.goBack, this);
       this.postcodeSearch = __bind(this.postcodeSearch, this);
       this.render = __bind(this.render, this);
       this.initialize = __bind(this.initialize, this);
@@ -966,7 +961,6 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
 
     QuickQuoteView.prototype.initialize = function() {
       QuickQuoteView.__super__.initialize.apply(this, arguments);
-      this.delegate('click', '#goBack', this.goBack);
       return mediator.subscribe("quickQuoteView", this.postcodeSearch);
     };
 
@@ -1003,11 +997,6 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
           return console.log("error");
         }
       });
-    };
-
-    QuickQuoteView.prototype.goBack = function() {
-      new CarouselView();
-      return this.dispose;
     };
 
     outOfBounds = function(postcode) {
