@@ -930,7 +930,7 @@ window.require.register("views/prices-view", function(exports, require, module) 
   
 });
 window.require.register("views/quickQuote-view", function(exports, require, module) {
-  var QuickQuoteView, View, mediator, template,
+  var CarouselView, QuickQuoteView, View, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -941,6 +941,8 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
 
   mediator = require('mediator');
 
+  CarouselView = require('./carousel-view');
+
   module.exports = QuickQuoteView = (function(_super) {
     var inBounds, outOfBounds, showErrorAlert,
       _this = this;
@@ -949,6 +951,7 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
 
     function QuickQuoteView() {
       this.closeLoginErrorAlert = __bind(this.closeLoginErrorAlert, this);
+      this.goBack = __bind(this.goBack, this);
       this.postcodeSearch = __bind(this.postcodeSearch, this);
       this.render = __bind(this.render, this);
       this.initialize = __bind(this.initialize, this);
@@ -999,6 +1002,11 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
           return console.log("error");
         }
       });
+    };
+
+    QuickQuoteView.prototype.goBack = function() {
+      new CarouselView();
+      return this.dispose;
     };
 
     outOfBounds = function(postcode) {
@@ -1157,7 +1165,7 @@ window.require.register("views/templates/quickQuote", function(exports, require,
     
 
 
-    return " <div id=\"topRowContent\">\r\n<h1>Fuck</h1>\r\n </div>";});
+    return " <div id=\"topRowContent\">\r\n<h1>Fuck</h1>\r\n<button class=\"btn\" text=\"Go Back\"/>\r\n </div>";});
 });
 window.require.register("views/templates/quote", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
