@@ -942,7 +942,7 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
   mediator = require('mediator');
 
   module.exports = QuickQuoteView = (function(_super) {
-    var showErrorAlert, validate, validatePostcode,
+    var inBounds, outOfBounds, showErrorAlert,
       _this = this;
 
     __extends(QuickQuoteView, _super);
@@ -983,7 +983,10 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
         },
         statusCode: {
           422: function() {
-            return showErrorAlert("Postcode not in service area.");
+            return outOfBounds(item);
+          },
+          200: function() {
+            return inBounds(item);
           },
           502: function() {
             return showErrorAlert("<strong>Whoops - Something has gone wrong</strong> Please try again.");
@@ -998,18 +1001,12 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
       });
     };
 
-    validate = function(postcode) {
-      var errors;
-      errors = [];
-      if (postcode.length < 1 || !validatePostcode(postcode)) {
-        errors.push("Please use a valid postcode");
-      }
-      if (errors.length > 0) {
-        showErrorAlert(errors);
-        return false;
-      } else {
-        return true;
-      }
+    outOfBounds = function(postcode) {
+      return console.log("out of bounds " + postcode);
+    };
+
+    inBounds = function(postcode) {
+      return console.log("in bounds " + postcode);
     };
 
     QuickQuoteView.prototype.closeLoginErrorAlert = function() {
@@ -1019,18 +1016,6 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
     showErrorAlert = function(message) {
       $('#postcodeResult').html(message);
       return $('#validPostcode').show();
-    };
-
-    validatePostcode = function(postcode) {
-      var belfastPostcode, postcodeRegEx;
-      console.log(postcode);
-      postcodeRegEx = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})$/;
-      belfastPostcode = /^([Bb][Tt])/;
-      if (belfastPostcode.test(postcode)) {
-        return postcodeRegEx.test(postcode);
-      } else {
-        return false;
-      }
     };
 
     return QuickQuoteView;
