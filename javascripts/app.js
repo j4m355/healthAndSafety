@@ -440,7 +440,7 @@ window.require.register("views/base/view", function(exports, require, module) {
   
 });
 window.require.register("views/carousel-view", function(exports, require, module) {
-  var CarouselView, View, mediator, template,
+  var CarouselView, QuickQuoteView, View, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -450,6 +450,8 @@ window.require.register("views/carousel-view", function(exports, require, module
   View = require('views/base/view');
 
   mediator = require('mediator');
+
+  QuickQuoteView = require('./quickQuote-view');
 
   module.exports = CarouselView = (function(_super) {
     var showErrorAlert, validate, validatePostcode,
@@ -477,39 +479,20 @@ window.require.register("views/carousel-view", function(exports, require, module
     };
 
     CarouselView.prototype.render = function() {
-      this.$el.hide();
       CarouselView.__super__.render.apply(this, arguments);
       this.closeLoginErrorAlert();
-      this.$('.carousel').carousel();
-      return this.$el.fadeIn();
+      return this.$('.carousel').carousel();
     };
 
     CarouselView.prototype.postcodeSearch = function(e) {
-      var postcode, valid;
+      var postcode;
       if (e.keyCode === 13) {
-        this.closeLoginErrorAlert();
         postcode = $('#postcodeBox').val();
-        valid = validate(postcode);
-        if (valid) {
-          return $.ajax({
-            url: "/api/postcode",
-            type: "post",
-            data: $('#postcodeBox').serialize(),
-            statusCode: {
-              422: function() {
-                return showErrorAlert("Postcode not in service area.");
-              },
-              502: function() {
-                return showErrorAlert("<strong>Whoops - Something has gone wrong</strong> Please try again.");
-              }
-            },
-            success: function(jqXhr, textStatus) {
-              return console.log(jqXhr);
-            },
-            error: function() {
-              return console.log("error");
-            }
-          });
+        if (validate(postcode)) {
+          this.$el.fadeOut();
+          new QuickQuoteView();
+          mediator.publish("quickQuoteView", postcode);
+          return this.dispose;
         }
       }
     };
@@ -947,8 +930,112 @@ window.require.register("views/prices-view", function(exports, require, module) 
   
 });
 window.require.register("views/quickQuote-view", function(exports, require, module) {
-  
+  var QuickQuoteView, View, mediator, template,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+  template = require('views/templates/quickQuote');
+
+  View = require('views/base/view');
+
+  mediator = require('mediator');
+
+  module.exports = QuickQuoteView = (function(_super) {
+    var showErrorAlert, validate, validatePostcode,
+      _this = this;
+
+    __extends(QuickQuoteView, _super);
+
+    function QuickQuoteView() {
+      this.closeLoginErrorAlert = __bind(this.closeLoginErrorAlert, this);
+      this.postcodeSearch = __bind(this.postcodeSearch, this);
+      this.render = __bind(this.render, this);
+      this.initialize = __bind(this.initialize, this);
+      QuickQuoteView.__super__.constructor.apply(this, arguments);
+    }
+
+    QuickQuoteView.prototype.autoRender = true;
+
+    QuickQuoteView.prototype.container = '#topRow';
+
+    QuickQuoteView.prototype.template = template;
+
+    QuickQuoteView.prototype.initialize = function() {
+      QuickQuoteView.__super__.initialize.apply(this, arguments);
+      return mediator.subscribe("quickQuoteView", this.postcodeSearch);
+    };
+
+    QuickQuoteView.prototype.render = function() {
+      this.$el.hide();
+      QuickQuoteView.__super__.render.apply(this, arguments);
+      return this.$el.fadeIn();
+    };
+
+    QuickQuoteView.prototype.postcodeSearch = function(item) {
+      console.log(item);
+      this.closeLoginErrorAlert();
+      return $.ajax({
+        url: "/api/postcode",
+        type: "post",
+        data: {
+          postcode: item
+        },
+        statusCode: {
+          422: function() {
+            return showErrorAlert("Postcode not in service area.");
+          },
+          502: function() {
+            return showErrorAlert("<strong>Whoops - Something has gone wrong</strong> Please try again.");
+          }
+        },
+        success: function(jqXhr, textStatus) {
+          return console.log(jqXhr);
+        },
+        error: function() {
+          return console.log("error");
+        }
+      });
+    };
+
+    validate = function(postcode) {
+      var errors;
+      errors = [];
+      if (postcode.length < 1 || !validatePostcode(postcode)) {
+        errors.push("Please use a valid postcode");
+      }
+      if (errors.length > 0) {
+        showErrorAlert(errors);
+        return false;
+      } else {
+        return true;
+      }
+    };
+
+    QuickQuoteView.prototype.closeLoginErrorAlert = function() {
+      return this.$('#validPostcode').hide();
+    };
+
+    showErrorAlert = function(message) {
+      $('#postcodeResult').html(message);
+      return $('#validPostcode').show();
+    };
+
+    validatePostcode = function(postcode) {
+      var belfastPostcode, postcodeRegEx;
+      console.log(postcode);
+      postcodeRegEx = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})$/;
+      belfastPostcode = /^([Bb][Tt])/;
+      if (belfastPostcode.test(postcode)) {
+        return postcodeRegEx.test(postcode);
+      } else {
+        return false;
+      }
+    };
+
+    return QuickQuoteView;
+
+  }).call(this, View);
   
 });
 window.require.register("views/quote-view", function(exports, require, module) {
@@ -1085,7 +1172,7 @@ window.require.register("views/templates/quickQuote", function(exports, require,
     
 
 
-    return " <div id=\"topRowContent\">\r\n\r\n </div>";});
+    return " <div id=\"topRowContent\">\r\n<h1>Fuck</h1>\r\n </div>";});
 });
 window.require.register("views/templates/quote", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
