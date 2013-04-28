@@ -881,7 +881,7 @@ window.require.register("views/home-page-view", function(exports, require, modul
             type: "post",
             data: $('#postcodeBox').serialize(),
             statusCode: {
-              409: function() {
+              422: function() {
                 return showErrorAlert("Postcode not in service area.");
               },
               502: function() {
