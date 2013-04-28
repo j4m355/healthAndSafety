@@ -966,6 +966,7 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
 
     QuickQuoteView.prototype.initialize = function() {
       QuickQuoteView.__super__.initialize.apply(this, arguments);
+      this.delegate('click', '#goBack', this.goBack);
       return mediator.subscribe("quickQuoteView", this.postcodeSearch);
     };
 
@@ -1165,7 +1166,7 @@ window.require.register("views/templates/quickQuote", function(exports, require,
     
 
 
-    return " <div id=\"topRowContent\">\r\n<h1>Fuck</h1>\r\n<button class=\"btn\" text=\"Go Back\"/>\r\n </div>";});
+    return " <div id=\"topRowContent\">\r\n<h1>Fuck</h1>\r\n<input class=\"btn\" id=\"goBack\" value=\"Go Back\"></input>\r\n </div>";});
 });
 window.require.register("views/templates/quote", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
