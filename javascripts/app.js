@@ -334,83 +334,6 @@ window.require.register("routes", function(exports, require, module) {
   };
   
 });
-window.require.register("views/appointmentWizard-view", function(exports, require, module) {
-  var AppointmentWizardView, Calendar, View, mediator, template,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  template = require('views/templates/appointmentWizard');
-
-  View = require('views/base/view');
-
-  mediator = require('mediator');
-
-  Calendar = components('calendar');
-
-  module.exports = AppointmentWizardView = (function(_super) {
-
-    __extends(AppointmentWizardView, _super);
-
-    function AppointmentWizardView() {
-      this.select = __bind(this.select, this);
-      this.render = __bind(this.render, this);
-      this.backPassage = __bind(this.backPassage, this);
-      this.initialise = __bind(this.initialise, this);
-      AppointmentWizardView.__super__.constructor.apply(this, arguments);
-    }
-
-    AppointmentWizardView.prototype.autoRender = true;
-
-    AppointmentWizardView.prototype.className = 'contact-page';
-
-    AppointmentWizardView.prototype.container = '#page-container';
-
-    AppointmentWizardView.prototype.template = template;
-
-    AppointmentWizardView.prototype.initialise = function() {
-      AppointmentWizardView.__super__.initialise.apply(this, arguments);
-      return mediator.subscribe('postcodeSearch', this.backPassage);
-    };
-
-    AppointmentWizardView.prototype.backPassage = function(postcode) {
-      console.log(postcode);
-      $.ajax({
-        url: "/api/postcode/?postcode=" + postcode,
-        type: "post",
-        error: function(e) {
-          return console.log(e);
-        },
-        success: function(e) {
-          return console.log(e);
-        }
-      });
-      return console.log("linesman");
-    };
-
-    AppointmentWizardView.prototype.render = function() {
-      var calendar;
-      AppointmentWizardView.__super__.render.apply(this, arguments);
-      calendar = new Calendar();
-      calendar.el.appendTo(this.$('#calendarView'));
-      return calendar.on('change', this.select);
-    };
-
-    AppointmentWizardView.prototype.select = function(dateOrEvent) {
-      if ($(dateOrEvent.currentTarget).text() !== "Next") {
-        if (dateOrEvent.getTime) {
-          return this.set(dateOrEvent);
-        } else {
-          return this.set(new Date(dateString));
-        }
-      }
-    };
-
-    return AppointmentWizardView;
-
-  })(View);
-  
-});
 window.require.register("views/appointments-view", function(exports, require, module) {
   var AppointmentsView, Calendar, View, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -514,6 +437,121 @@ window.require.register("views/base/view", function(exports, require, module) {
     return View;
 
   })(Chaplin.View);
+  
+});
+window.require.register("views/carousel-view", function(exports, require, module) {
+  var CarouselView, View, mediator, template,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  template = require('views/templates/carousel');
+
+  View = require('views/base/view');
+
+  mediator = require('mediator');
+
+  module.exports = CarouselView = (function(_super) {
+    var showErrorAlert, validate, validatePostcode,
+      _this = this;
+
+    __extends(CarouselView, _super);
+
+    function CarouselView() {
+      this.closeLoginErrorAlert = __bind(this.closeLoginErrorAlert, this);
+      this.postcodeSearch = __bind(this.postcodeSearch, this);
+      this.render = __bind(this.render, this);
+      this.initialize = __bind(this.initialize, this);
+      CarouselView.__super__.constructor.apply(this, arguments);
+    }
+
+    CarouselView.prototype.autoRender = true;
+
+    CarouselView.prototype.container = '#topRow';
+
+    CarouselView.prototype.template = template;
+
+    CarouselView.prototype.initialize = function() {
+      CarouselView.__super__.initialize.apply(this, arguments);
+      return this.delegate('keyup', '#postcodeBox', this.postcodeSearch);
+    };
+
+    CarouselView.prototype.render = function() {
+      this.$el.hide();
+      CarouselView.__super__.render.apply(this, arguments);
+      this.closeLoginErrorAlert();
+      this.$('.carousel').carousel();
+      return this.$el.fadeIn();
+    };
+
+    CarouselView.prototype.postcodeSearch = function(e) {
+      var postcode, valid;
+      if (e.keyCode === 13) {
+        this.closeLoginErrorAlert();
+        postcode = $('#postcodeBox').val();
+        valid = validate(postcode);
+        if (valid) {
+          return $.ajax({
+            url: "/api/postcode",
+            type: "post",
+            data: $('#postcodeBox').serialize(),
+            statusCode: {
+              422: function() {
+                return showErrorAlert("Postcode not in service area.");
+              },
+              502: function() {
+                return showErrorAlert("<strong>Whoops - Something has gone wrong</strong> Please try again.");
+              }
+            },
+            success: function(jqXhr, textStatus) {
+              return console.log(jqXhr);
+            },
+            error: function() {
+              return console.log("error");
+            }
+          });
+        }
+      }
+    };
+
+    validate = function(postcode) {
+      var errors;
+      errors = [];
+      if (postcode.length < 1 || !validatePostcode(postcode)) {
+        errors.push("Please use a valid postcode");
+      }
+      if (errors.length > 0) {
+        showErrorAlert(errors);
+        return false;
+      } else {
+        return true;
+      }
+    };
+
+    CarouselView.prototype.closeLoginErrorAlert = function() {
+      return this.$('#validPostcode').hide();
+    };
+
+    showErrorAlert = function(message) {
+      $('#postcodeResult').html(message);
+      return $('#validPostcode').show();
+    };
+
+    validatePostcode = function(postcode) {
+      var belfastPostcode, postcodeRegEx;
+      console.log(postcode);
+      postcodeRegEx = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})$/;
+      belfastPostcode = /^([Bb][Tt])/;
+      if (belfastPostcode.test(postcode)) {
+        return postcodeRegEx.test(postcode);
+      } else {
+        return false;
+      }
+    };
+
+    return CarouselView;
+
+  }).call(this, View);
   
 });
 window.require.register("views/contact-view", function(exports, require, module) {
@@ -819,7 +857,7 @@ window.require.register("views/header-view", function(exports, require, module) 
   
 });
 window.require.register("views/home-page-view", function(exports, require, module) {
-  var AppointmentWizardView, HomePageView, Spinner, View, mediator, template,
+  var CarouselView, HomePageView, Spinner, View, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -830,19 +868,15 @@ window.require.register("views/home-page-view", function(exports, require, modul
 
   mediator = require('mediator');
 
-  AppointmentWizardView = require('./appointmentWizard-view');
-
   Spinner = components('spin.js');
 
+  CarouselView = require('./carousel-view');
+
   module.exports = HomePageView = (function(_super) {
-    var showErrorAlert, validate, validatePostcode,
-      _this = this;
 
     __extends(HomePageView, _super);
 
     function HomePageView() {
-      this.closeLoginErrorAlert = __bind(this.closeLoginErrorAlert, this);
-      this.postcodeSearch = __bind(this.postcodeSearch, this);
       this.render = __bind(this.render, this);
       this.initialize = __bind(this.initialize, this);
       HomePageView.__super__.constructor.apply(this, arguments);
@@ -857,86 +891,21 @@ window.require.register("views/home-page-view", function(exports, require, modul
     HomePageView.prototype.template = template;
 
     HomePageView.prototype.initialize = function() {
-      HomePageView.__super__.initialize.apply(this, arguments);
-      return this.delegate('keyup', '#postcodeBox', this.postcodeSearch);
+      return HomePageView.__super__.initialize.apply(this, arguments);
     };
 
     HomePageView.prototype.render = function() {
       this.$el.hide();
       HomePageView.__super__.render.apply(this, arguments);
-      this.closeLoginErrorAlert();
-      this.$('.carousel').carousel();
+      new CarouselView({
+        container: this.$("#topRow")
+      });
       return this.$el.fadeIn();
-    };
-
-    HomePageView.prototype.postcodeSearch = function(e) {
-      var postcode, valid;
-      if (e.keyCode === 13) {
-        this.closeLoginErrorAlert();
-        postcode = $('#postcodeBox').val();
-        valid = validate(postcode);
-        if (valid) {
-          return $.ajax({
-            url: "/api/postcode",
-            type: "post",
-            data: $('#postcodeBox').serialize(),
-            statusCode: {
-              422: function() {
-                return showErrorAlert("Postcode not in service area.");
-              },
-              502: function() {
-                return showErrorAlert("<strong>Whoops - Something has gone wrong</strong> Please try again.");
-              }
-            },
-            success: function(jqXhr, textStatus) {
-              return console.log(jqXhr);
-            },
-            error: function() {
-              return console.log("error");
-            }
-          });
-        }
-      }
-    };
-
-    validate = function(postcode) {
-      var errors;
-      errors = [];
-      if (postcode.length < 1 || !validatePostcode(postcode)) {
-        errors.push("Please use a valid postcode");
-      }
-      if (errors.length > 0) {
-        showErrorAlert(errors);
-        return false;
-      } else {
-        return true;
-      }
-    };
-
-    HomePageView.prototype.closeLoginErrorAlert = function() {
-      return this.$('#validPostcode').hide();
-    };
-
-    showErrorAlert = function(message) {
-      $('#postcodeResult').html(message);
-      return $('#validPostcode').show();
-    };
-
-    validatePostcode = function(postcode) {
-      var belfastPostcode, postcodeRegEx;
-      console.log(postcode);
-      postcodeRegEx = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})$/;
-      belfastPostcode = /^([Bb][Tt])/;
-      if (belfastPostcode.test(postcode)) {
-        return postcodeRegEx.test(postcode);
-      } else {
-        return false;
-      }
     };
 
     return HomePageView;
 
-  }).call(this, View);
+  })(View);
   
 });
 window.require.register("views/prices-view", function(exports, require, module) {
@@ -975,6 +944,11 @@ window.require.register("views/prices-view", function(exports, require, module) 
     return PricesView;
 
   })(View);
+  
+});
+window.require.register("views/quickQuote-view", function(exports, require, module) {
+  
+
   
 });
 window.require.register("views/quote-view", function(exports, require, module) {
@@ -1049,14 +1023,6 @@ window.require.register("views/site-view", function(exports, require, module) {
   })(View);
   
 });
-window.require.register("views/templates/appointmentWizard", function(exports, require, module) {
-  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    
-
-
-    return "<div id=\"presenter\">\r\n<div id=\"appointmentWizard\">\r\n<h1>Denzel</h1>\r\n<div class=\"row\" id=\"calendarView\">\r\n	</div>\r\n\r\n</div>\r\n</div>";});
-});
 window.require.register("views/templates/appointments", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
@@ -1064,6 +1030,14 @@ window.require.register("views/templates/appointments", function(exports, requir
 
 
     return "<div id=\"presenter\">\r\n\r\n<div class=\"row\">\r\n<h1>Make an Appointment</h1>\r\n</div>\r\n\r\n<div class=\"row\">\r\n<p> To make an appointment for our free collect & return service, simply select your \r\n       region, pick a date that suits, and fill in a few details:</p>\r\n   <p>We begin our collections from 5:30 in the evenings and service the Belfast &amp; \r\n       Downpatrick areas. </p>\r\n        <p>If you include your mobile number we can send you an automatic text when we are \r\n            nearly with you.</p>\r\n        \r\n        \r\n        <div align=left> <span class=\"style1\">Collection Days:<br /><b>Mon &amp; Thur&nbsp;&nbsp;&nbsp; \r\n            </b>&nbsp;5:30pm - 8pm<br />\r\n            <br />\r\n        \r\n    </span>\r\n            For customers outside our service area, or those who would prefer to bring the \r\n            machine to us <strong><span>Mon - Thur</span> </strong>please <span><a href=\"/BringToUs\">\r\n            click here</a><br />\r\n   \r\n    \r\n    \r\n        </div>\r\n        \r\n    </span>\r\n   \r\n   \r\n    \r\n</div>\r\n\r\n\r\n\r\n  <div id=\"appointmentWizard-container\" class=\"row\">\r\n\r\n</div>\r\n\r\n<div>\r\n<img class=\"pull-right pull-down\" src=\"images/bookimage.jpg\" style=\"width: 283px; height: 424px\" /></div>\r\n</div>\r\n\r\n</div>";});
+});
+window.require.register("views/templates/carousel", function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    
+
+
+    return "        <div id=\"topRowContent\">\r\n\r\n        <div class=\"span4\">\r\n            <div id=\"PostCodeRegion\">\r\n\r\n                <div id=\"WelcomeText\">\r\n          \r\n                    <p>Welcome to <strong><em>Dr PC Computer & Laptop Repair Belfast</em></strong>.</p>\r\n                    <p>\r\n                    To get a <strong><em>quick quote & find services in your</em></strong> enter your <strong><em>postcode</em></strong> in the box below and hit the enter key</p>\r\n                    <div id=\"validPostcode\" class=\"alert alert-error\">\r\n                    <div id=\"postcodeResult\"></div>\r\n                    </div>\r\n                    <p><input id=\"postcodeBox\" name=\"postcode\" class=\"postcodeboxdiv\" type=\"text\" value=\"BT\"></input>\r\n                </div>                    \r\n            </div>                       \r\n        </div>\r\n\r\n\r\n\r\n        <div class=\"span7\">\r\n\r\n<div id=\"myCarousel\" class=\"carousel slide\">\r\n                <ol class=\"carousel-indicators\">\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"1\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"2\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"3\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"4\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"5\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"6\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"7\" class=\"\"></li>\r\n                </ol>\r\n                <div class=\"carousel-inner\">\r\n                  <div class=\"item active\">\r\n                    <img src=\"/images/a1.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a2.jpg\" alt=\"\">\r\n                  \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a3.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a4.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a5.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a6.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a7.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a8.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                </div>\r\n              </div>\r\n\r\n\r\n\r\n        </div>\r\n         </div>";});
 });
 window.require.register("views/templates/contact", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1095,7 +1069,7 @@ window.require.register("views/templates/home", function(exports, require, modul
     
 
 
-    return "<div id=\"presenter\">\r\n    <div class=\"row\">      \r\n        <div class=\"span4\">\r\n            <div id=\"PostCodeRegion\">\r\n\r\n                <div id=\"WelcomeText\">\r\n          \r\n                    <p>Welcome to <strong><em>Dr PC Computer & Laptop Repair Belfast</em></strong>.</p>\r\n                    <p>\r\n                    To get a <strong><em>quick quote & find services in your</em></strong> enter your <strong><em>postcode</em></strong> in the box below and hit the enter key</p>\r\n                    <div id=\"validPostcode\" class=\"alert alert-error\">\r\n                    <div id=\"postcodeResult\"></div>\r\n                    </div>\r\n                    <p><input id=\"postcodeBox\" name=\"postcode\" class=\"postcodeboxdiv\" type=\"text\" value=\"BT\"></input>\r\n                </div>                    \r\n            </div>                       \r\n        </div>\r\n\r\n\r\n\r\n        <div class=\"span7\">\r\n\r\n<div id=\"myCarousel\" class=\"carousel slide\">\r\n                <ol class=\"carousel-indicators\">\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"1\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"2\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"3\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"4\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"5\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"6\" class=\"\"></li>\r\n                  <li data-target=\"#myCarousel\" data-slide-to=\"7\" class=\"\"></li>\r\n                </ol>\r\n                <div class=\"carousel-inner\">\r\n                  <div class=\"item active\">\r\n                    <img src=\"/images/a1.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a2.jpg\" alt=\"\">\r\n                  \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a3.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a4.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a5.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a6.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a7.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                  <div class=\"item\">\r\n                    <img src=\"/images/a8.jpg\" alt=\"\">\r\n                   \r\n                  </div>\r\n                </div>\r\n              </div>\r\n\r\n\r\n\r\n        </div>\r\n    </div>\r\n\r\n\r\n    <div class=\"row\">\r\n      <div class=\"span4 homecols\">\r\n       \r\n                    <div class=\"row\">\r\n                        <a href=\"../aboutus\">\r\n                            <img src=\"/images/promises1.jpg\"  border=\"0\"></a>\r\n                    </div>\r\n\r\n                    <div class=\"row\">                        \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises2.jpg\">\r\n                            </div>\r\n                            <div class=\"span3\">We provide a reliable and affordable <em>Computer repair</em>\r\n                                service in the <em>Belfast</em> area -Why not <a href=\"../Book\"> <strong><em>Book an appointment now</em></strong></a> ?</div>\r\n                    \r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" width=\"232\" height=\"23\">\r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                    \r\n                            <div class=\"span1\">\r\n                                <img alt=\"\" src=\"/images/promises4.jpg\">\r\n                            </div>\r\n\r\n                            <div class=\"span3\">\r\n                                Virus removal - <b>£30</b>\r\n                                <br>\r\n                                Laptop screen fitted - <b>£40</b>\r\n                                <br>\r\n                                Memory Upgrade - <b>£30</b><br>\r\n                                VHS to DVD - <b>£10</b><br>\r\n                                Laptop keyboard fitted - <b>£20</b><br>\r\n                                Xbox &amp; PS3 repair - See <a href=\"../Prices\"><strong><em>Prices</em></strong></a>\r\n                            </div>\r\n\r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                       \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises6.jpg\" width=\"67\" height=\"55\">\r\n                            </div>\r\n\r\n                            <div class=\"span3\">\r\n                                Using our online tracking system you can <i><a href=\"../login\">\r\n                                <strong>track your repair</strong></a></i> 24/7 \r\n                            </div>\r\n                        \r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n\r\n\r\n                    <div class=\"row\">\r\n                       \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises5.jpg\" width=\"67\" height=\"70\">\r\n                            </div>\r\n\r\n                            <div class=\"span3\">We are quite confident we can repair your computer. But in the\r\n                                event we cant fix your machine you <i>wont be charged</i> a penny</div>\r\n                      \r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises3.jpg\" width=\"67\" height=\"72\"></div>\r\n                            <div class=\"span3\">We aim to have your machine back to you within <i>3 working days</i>\r\n                                or sooner. On some jobs we offer an express 24 hour repair service.&nbsp; Get a\r\n                                <strong><em><a href=\"/Quote/NoPostcodeQuote.aspx\">Quick Quote</a></em></strong> to find out if your \r\n                                job qualifies.</div>\r\n                       \r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n              \r\n      </div>\r\n\r\n      <div class=\"span4 homecols moveDown\">        \r\n            <div class=\"row giveUsABorder\">\r\n                    <h5>\r\n                        Virus Removal &amp; Data recovery</h5>\r\n                    Need a virus removal or data recovery service in Belfast?<br>\r\n                    No problem, we offer a range of affordable computer &amp; laptop repair services. We \r\n                    can help you remove viruses from your system and prevent them returning. Unlike \r\n                    some other companies we can work with you to ensure that your most important \r\n                    data is recovered from your hard drive. We also offer an express service on this \r\n                    job, get a <strong><em><a href=\"/Quote/NoPostcodeQuote.aspx\">quick quote</a></em></strong> to find \r\n                    out more.<br>\r\n                    <br>\r\n                    Our cheap virus removal, (format &amp; restore to factory settings) service is only\r\n                    <b>£40</b> or <b>£30</b> if you back up your own files before hand.<br>\r\n                    <br>\r\n                    Our affordable data recovery services start from £30 depending on the size of your\r\n                    hard drive.<br>\r\n                    <br>\r\n                    <img alt=\"\" src=\"/images/virus1.jpg\"><br>\r\n                    <br>\r\n                    <h5>\r\n                        VHS to DVD</h5>\r\n                    <p>\r\n                        Cheap VHS to DVD Conversion Service :\r\n                        <br>\r\n                        For <b>£10</b> per tape we can convert your old VHS into the more versatile DVD\r\n                        format.</p>\r\n                    <p>\r\n                        Camcorder to DVD Conversion Service :\r\n                        <br>\r\n                        For <b>£10</b> per tape we can convert your&nbsp; camcorder tapes into DVD format.</p>\r\n                    <p>\r\n                        &nbsp;<b>£5</b> For any additional copies or <strong>£10</strong> for four copies.</p>\r\n        </div>\r\n        \r\n      </div>\r\n\r\n\r\n\r\n      <div class=\"span4 homecols moveDown\">\r\n        <div class=\"row\">\r\n                    <h5>\r\n                        Laptop Screen Repair</h5>\r\n                    Faulty or cracked laptop screen?\r\n                    <p>\r\n                        Laptop Repair :</p>\r\n                    <p>\r\n                        Laptop screen replacement in Belfast for <b>£40</b>. Get a <a href=\"/Quote/NoPostcodeQuote.aspx\">\r\n                        <strong><em>Quick quote</em></strong></a>\r\n                        to find the full price for your make and model<p>\r\n                            .<img alt=\"\" class=\"laptopman\" src=\"/images/chat1.jpg\" /></p>\r\n                        <h5>\r\n                            XBox DVD Drive Repair</h5>\r\n                        Xbox discs not being read? Faulty xbox disc drive?<br />\r\n                        <br />\r\n                        For an affordable <strong>£60</strong> we offer an Xbox 360 DVD drive replacement\r\n                        service.&nbsp; We use an exact match drive to ensure your xbox does not get banned\r\n                        from live.<br />\r\n                        <br />\r\n                        Turn overtime for this repair depends on our supplier having the part. It takes\r\n                        us a day to switch the drive. Typical turn over 3-5 working days.\r\n                        <br />\r\n                        <a href=\"../Book\"><strong><em>Book an appointment now</em></strong></a>\r\n            </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n</div>";});
+    return "<div id=\"presenter\">\r\n    <div class=\"row\" id=\"topRow\">      \r\n\r\n    </div>\r\n\r\n\r\n    <div class=\"row\">\r\n      <div class=\"span4 homecols\">\r\n       \r\n                    <div class=\"row\">\r\n                        <a href=\"../aboutus\">\r\n                            <img src=\"/images/promises1.jpg\"  border=\"0\"></a>\r\n                    </div>\r\n\r\n                    <div class=\"row\">                        \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises2.jpg\">\r\n                            </div>\r\n                            <div class=\"span3\">We provide a reliable and affordable <em>Computer repair</em>\r\n                                service in the <em>Belfast</em> area -Why not <a href=\"../Book\"> <strong><em>Book an appointment now</em></strong></a> ?</div>\r\n                    \r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" width=\"232\" height=\"23\">\r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                    \r\n                            <div class=\"span1\">\r\n                                <img alt=\"\" src=\"/images/promises4.jpg\">\r\n                            </div>\r\n\r\n                            <div class=\"span3\">\r\n                                Virus removal - <b>£30</b>\r\n                                <br>\r\n                                Laptop screen fitted - <b>£40</b>\r\n                                <br>\r\n                                Memory Upgrade - <b>£30</b><br>\r\n                                VHS to DVD - <b>£10</b><br>\r\n                                Laptop keyboard fitted - <b>£20</b><br>\r\n                                Xbox &amp; PS3 repair - See <a href=\"../Prices\"><strong><em>Prices</em></strong></a>\r\n                            </div>\r\n\r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                       \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises6.jpg\" width=\"67\" height=\"55\">\r\n                            </div>\r\n\r\n                            <div class=\"span3\">\r\n                                Using our online tracking system you can <i><a href=\"../login\">\r\n                                <strong>track your repair</strong></a></i> 24/7 \r\n                            </div>\r\n                        \r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n\r\n\r\n                    <div class=\"row\">\r\n                       \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises5.jpg\" width=\"67\" height=\"70\">\r\n                            </div>\r\n\r\n                            <div class=\"span3\">We are quite confident we can repair your computer. But in the\r\n                                event we cant fix your machine you <i>wont be charged</i> a penny</div>\r\n                      \r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises3.jpg\" width=\"67\" height=\"72\"></div>\r\n                            <div class=\"span3\">We aim to have your machine back to you within <i>3 working days</i>\r\n                                or sooner. On some jobs we offer an express 24 hour repair service.&nbsp; Get a\r\n                                <strong><em><a href=\"/Quote/NoPostcodeQuote.aspx\">Quick Quote</a></em></strong> to find out if your \r\n                                job qualifies.</div>\r\n                       \r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n              \r\n      </div>\r\n\r\n      <div class=\"span4 homecols moveDown\">        \r\n            <div class=\"row giveUsABorder\">\r\n                    <h5>\r\n                        Virus Removal &amp; Data recovery</h5>\r\n                    Need a virus removal or data recovery service in Belfast?<br>\r\n                    No problem, we offer a range of affordable computer &amp; laptop repair services. We \r\n                    can help you remove viruses from your system and prevent them returning. Unlike \r\n                    some other companies we can work with you to ensure that your most important \r\n                    data is recovered from your hard drive. We also offer an express service on this \r\n                    job, get a <strong><em><a href=\"/Quote/NoPostcodeQuote.aspx\">quick quote</a></em></strong> to find \r\n                    out more.<br>\r\n                    <br>\r\n                    Our cheap virus removal, (format &amp; restore to factory settings) service is only\r\n                    <b>£40</b> or <b>£30</b> if you back up your own files before hand.<br>\r\n                    <br>\r\n                    Our affordable data recovery services start from £30 depending on the size of your\r\n                    hard drive.<br>\r\n                    <br>\r\n                    <img alt=\"\" src=\"/images/virus1.jpg\"><br>\r\n                    <br>\r\n                    <h5>\r\n                        VHS to DVD</h5>\r\n                    <p>\r\n                        Cheap VHS to DVD Conversion Service :\r\n                        <br>\r\n                        For <b>£10</b> per tape we can convert your old VHS into the more versatile DVD\r\n                        format.</p>\r\n                    <p>\r\n                        Camcorder to DVD Conversion Service :\r\n                        <br>\r\n                        For <b>£10</b> per tape we can convert your&nbsp; camcorder tapes into DVD format.</p>\r\n                    <p>\r\n                        &nbsp;<b>£5</b> For any additional copies or <strong>£10</strong> for four copies.</p>\r\n        </div>\r\n        \r\n      </div>\r\n\r\n\r\n\r\n      <div class=\"span4 homecols moveDown\">\r\n        <div class=\"row\">\r\n                    <h5>\r\n                        Laptop Screen Repair</h5>\r\n                    Faulty or cracked laptop screen?\r\n                    <p>\r\n                        Laptop Repair :</p>\r\n                    <p>\r\n                        Laptop screen replacement in Belfast for <b>£40</b>. Get a <a href=\"/Quote/NoPostcodeQuote.aspx\">\r\n                        <strong><em>Quick quote</em></strong></a>\r\n                        to find the full price for your make and model<p>\r\n                            .<img alt=\"\" class=\"laptopman\" src=\"/images/chat1.jpg\" /></p>\r\n                        <h5>\r\n                            XBox DVD Drive Repair</h5>\r\n                        Xbox discs not being read? Faulty xbox disc drive?<br />\r\n                        <br />\r\n                        For an affordable <strong>£60</strong> we offer an Xbox 360 DVD drive replacement\r\n                        service.&nbsp; We use an exact match drive to ensure your xbox does not get banned\r\n                        from live.<br />\r\n                        <br />\r\n                        Turn overtime for this repair depends on our supplier having the part. It takes\r\n                        us a day to switch the drive. Typical turn over 3-5 working days.\r\n                        <br />\r\n                        <a href=\"../Book\"><strong><em>Book an appointment now</em></strong></a>\r\n            </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n</div>";});
 });
 window.require.register("views/templates/prices", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1104,6 +1078,14 @@ window.require.register("views/templates/prices", function(exports, require, mod
 
 
     return "<div id=\"presenter\">\r\n\r\n<h1>Prices</h1>\r\n\r\n   <table class=\"table table-striped table-bordered table-hover\">\r\n            <tbody>\r\n                <tr>\r\n                    <th scope=\"col\">\r\n                        <div align=\"center\">\r\n                            Service\r\n                        </div>\r\n                    </th>\r\n                    <th scope=\"col\" >\r\n                        <div align=\"center\">\r\n                            Includes</div>\r\n                    </th>\r\n                    <th scope=\"col\" >\r\n                        <div align=\"center\">\r\n                            Cost</div>\r\n                    </th>\r\n                </tr>\r\n                <tr>\r\n                    <th scope=\"col\" >\r\n                        <div align=\"center\">\r\n                            <a id=\"1\" name=\"1\"></a>Remote Assistance </br> <a href=\"#top\">top</a>\r\n                        </div>\r\n                    </th>\r\n                    <td scope=\"col\" >\r\n                        <div align=\"center\">\r\n                            -Remotely taking control of your computer to sort your problem there and then</div>\r\n                    </td>\r\n                    <th scope=\"col\" >\r\n                        <div align=\"center\">\r\n                            £10.00</div>\r\n                    </th>\r\n                </tr>\r\n                <tr>\r\n                    <th scope=\"col\" >\r\n                        <div align=\"center\">\r\n                            <a id=\"2\" name=\"2\"></a>PC Health Check </br>  <a href=\"#top\">top</a>\r\n                        </div>\r\n                    </th>\r\n                    <td scope=\"col\" >\r\n                        <div align=\"center\">\r\n                            -Diagnose any hardware problems - Diagnose any blue screen problems\r\n                        </div>\r\n                    </td>\r\n                    <th scope=\"col\" >\r\n                        <div align=\"center\">\r\n                            £20.00</div>\r\n                    </th>\r\n                </tr>\r\n                <tr>\r\n                    <th scope=\"row\" >\r\n                        <div align=\"center\">\r\n                            <a id=\"3\" name=\"3\"></a>Minor Fixes </br>  <a href=\"#top\">top</a>\r\n                        </div>\r\n                    </th>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            -Restore computer to factory settings, no file backup - Simple fixes or tweaks that\r\n                            can't be fixed remotely - Upgrade memory\r\n                        </div>\r\n                    </td>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            <strong>£30.00</strong></div>\r\n                    </td>\r\n                </tr>\r\n                <tr>\r\n                    <th scope=\"row\" >\r\n                        <div align=\"center\">\r\n                            <a id=\"4\" name=\"4\"></a>Reformat &amp; Clear viruses </br>  <a href=\"#top\">top</a>\r\n                        </div>\r\n                    </th>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            -All Viruses removed -Files backed up &amp; restored -Restore computer to factory\r\n                            settings\r\n                        </div>\r\n                    </td>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            <strong>£40.00</strong></div>\r\n                    </td>\r\n                </tr>\r\n                <tr>\r\n                    <th scope=\"row\" >\r\n                        <div align=\"center\">\r\n                            <a id=\"5\" name=\"5\"></a>Install new hardware </br>  <a href=\"#top\">top</a>\r\n                        </div>\r\n                    </th>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            -Year warranty on all fitted parts - Upgrade hard drive space, graphics, cpu, repair\r\n                            laptop screens -New laptop keyboard (keyboard &amp; labour)\r\n                        </div>\r\n                    </td>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            <strong>£40.00</strong></div>\r\n                    </td>\r\n                </tr>\r\n                <tr>\r\n                    <th scope=\"row\" >\r\n                        <div align=\"center\">\r\n                            <a id=\"6\" name=\"6\"></a>Setup wireless network </br>  <a href=\"#top\">top</a>\r\n                        </div>\r\n                    </th>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            -Secure your network and personal information.</div>\r\n                    </td>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            <strong>£10.00 via remote £20.00 if call out required</strong></div>\r\n                    </td>\r\n                </tr>\r\n                <tr>\r\n                    <th scope=\"row\" >\r\n                        <div align=\"center\">\r\n                            <a id=\"7\" name=\"7\"></a>Recover lost files </br>  <a href=\"#top\">top</a>\r\n                        </div>\r\n                    </th>\r\n                    <td>\r\n                        <p align=\"center\">\r\n                            -Files scanned for viruses</p>\r\n                        <p align=\"center\">\r\n                            - Files burnt to Disc</p>\r\n                    </td>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            <strong>£30.00 for 4Gig</strong> <strong>£50.00 for over 4Gig</strong>\r\n                        </div>\r\n                    </td>\r\n                </tr>\r\n                <tr>\r\n                    <th scope=\"row\">\r\n                        <div align=\"center\">\r\n                            <a id=\"8\" name=\"8\"></a>VHS or Camcorder to DVD </br>  <a href=\"#top\">top</a>\r\n                        </div>\r\n                    </th>\r\n                    <td>\r\n                        <p align=\"center\">\r\n                            <span>If you have any old VHS or camcorder cassettes that you want converted to DVD\r\n                                format we can do this</span></p>\r\n                    </td>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            &nbsp;\r\n                        </div>\r\n                        <div align=\"center\">\r\n                            <strong>£10.00</strong>\r\n                        </div>\r\n                        <div align=\"center\">\r\n                            +£5 for 1 additional copy or\r\n                        </div>\r\n                        <div align=\"center\">\r\n                            +£10 for 4 extra copies\r\n                        </div>\r\n                        <div align=\"center\">\r\n                            &nbsp;\r\n                        </div>\r\n                    </td>\r\n                </tr>\r\n                <tr>\r\n                    <th scope=\"row\">\r\n                        <div align=\"center\">\r\n                            <a id=\"10\" name=\"10\"></a>Xbox 360 Repairs </br>  <a href=\"#top\">top</a>\r\n                        </div>\r\n                    </th>\r\n                    <td >\r\n                        <p align=\"center\">                       \r\n                            <strong>Prices include\r\n                                parts &amp; labour</strong></p>\r\n                  \r\n                        <p align=\"center\">\r\n                            Replacement DVD Drive</p>\r\n                        &nbsp;\r\n                        <p align=\"center\">\r\n                            Warranty – 1 Month\r\n                        Repair time – 1 – 3 days depending on parts available</p>\r\n                    </td>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            &nbsp;\r\n                        </div>\r\n                        <div align=\"center\">\r\n                            &nbsp;\r\n                        </div>\r\n                        &nbsp;\r\n                        <div align=\"center\">\r\n                            <strong>£60.00</strong>\r\n                        </div>\r\n                        <div align=\"center\">\r\n                            &nbsp;\r\n                        </div>\r\n                        <div align=\"center\">\r\n                            &nbsp;\r\n                        </div>\r\n                        <div align=\"center\">\r\n                            &nbsp;\r\n                        </div>\r\n                    </td>\r\n                </tr>\r\n                <tr>\r\n                    <th scope=\"row\">\r\n                        <div align=\"center\">\r\n                            Other Jobs </br>  <a href=\"#top\">top</a></div>\r\n                    </th>\r\n                    <td>\r\n                        <p align=\"center\">\r\n                            <span>We meet new problems and challenges every day, we are open to suggestions and\r\n                                are happy to help with any issue.</span></p>\r\n                    </td>\r\n                    <td>\r\n                        <div align=\"center\">\r\n                            &nbsp;\r\n                        </div>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n</div>";});
+});
+window.require.register("views/templates/quickQuote", function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    
+
+
+    return " <div id=\"topRowContent\">\r\n\r\n </div>";});
 });
 window.require.register("views/templates/quote", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
