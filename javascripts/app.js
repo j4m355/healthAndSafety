@@ -928,7 +928,7 @@ window.require.register("views/prices-view", function(exports, require, module) 
   
 });
 window.require.register("views/quickQuote-view", function(exports, require, module) {
-  var QuickQuoteView, View, mediator, template,
+  var QuickQuoteView, Spinner, View, denzel, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -938,6 +938,23 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
   View = require('views/base/view');
 
   mediator = require('mediator');
+
+  Spinner = components('spin.js');
+
+  denzel = new Spinner({
+    color: '#e5e5e5',
+    lines: 13,
+    className: 'spinner',
+    length: 20,
+    width: 10,
+    radius: 30,
+    corners: 1.0,
+    rotate: 0,
+    trail: 60,
+    speed: 1.0,
+    direction: 1,
+    shadow: false
+  }).spin();
 
   module.exports = QuickQuoteView = (function(_super) {
     var inBounds, outOfBounds, showErrorAlert,
@@ -967,7 +984,7 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
     QuickQuoteView.prototype.render = function() {
       this.$el.hide();
       QuickQuoteView.__super__.render.apply(this, arguments);
-      return this.$el.fadeIn();
+      return this.$('#spinner').html(denzel.el);
     };
 
     QuickQuoteView.prototype.postcodeSearch = function(item) {
@@ -991,7 +1008,8 @@ window.require.register("views/quickQuote-view", function(exports, require, modu
           }
         },
         success: function(jqXhr, textStatus) {
-          return console.log(jqXhr);
+          console.log(jqXhr);
+          return denzel.stop();
         },
         error: function() {
           return console.log("error");
@@ -1155,7 +1173,7 @@ window.require.register("views/templates/quickQuote", function(exports, require,
     
 
 
-    return " <div id=\"topRowContent\">\r\n<h1>Fuck</h1>\r\n<input class=\"btn\" id=\"goBack\" value=\"Go Back\"></input>\r\n </div>";});
+    return " <div id=\"topRowContent\">\r\n<div id=\"view\" class=\"span12\">\r\n<div id=\"spinner\" class=\"pagination-centered\"></div>\r\n</div>\r\n<h1>Fuck Me</h1>\r\n </div>";});
 });
 window.require.register("views/templates/quote", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
