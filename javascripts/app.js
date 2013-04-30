@@ -979,11 +979,13 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
           }
         },
         success: function(jqXhr, textStatus) {
-          console.log(jqXhr);
-          return denzel.stop();
+          return console.log(jqXhr);
         },
-        error: function() {
-          return console.log("error");
+        error: function(jqXhr, textStatus, errorThrown) {
+          return console.log(errorThrown);
+        },
+        complete: function() {
+          return denzel.stop();
         }
       });
     };
