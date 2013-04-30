@@ -494,7 +494,7 @@ window.require.register("views/templates/home/quickQuote", function(exports, req
     
 
 
-    return " <div id=\"topRowContent\">\r\n<div id=\"view\" class=\"span12\">\r\n<div id=\"spinner\" class=\"pagination-centered\"></div>\r\n</div>\r\n<h1>Fuck Me</h1>\r\n </div>";});
+    return " <div id=\"topRowContent\">\r\n<div id=\"view\" class=\"span12\">\r\n<div id=\"spinner\" class=\"pagination-centered\"></div>\r\n</div>\r\n </div>";});
 });
 window.require.register("views/templates/page/footer", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
