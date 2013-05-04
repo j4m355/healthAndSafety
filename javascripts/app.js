@@ -1087,17 +1087,13 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
     };
 
     outOfBounds = function(postcode) {
-      new OutboundView({
-        container: QuickQuoteView.$("#topRow")
-      });
+      new OutboundView();
       console.log("out of bounds " + postcode);
       return QuickQuoteView.dispose;
     };
 
     inBounds = function(postcode) {
-      new InboundView({
-        container: QuickQuoteView.$("#topRow")
-      });
+      new InboundView();
       console.log("in bounds " + postcode);
       return QuickQuoteView.dispose;
     };
