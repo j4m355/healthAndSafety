@@ -456,14 +456,6 @@ window.require.register("views/site-view", function(exports, require, module) {
   })(View);
   
 });
-window.require.register("views/templates/appointment/appointments", function(exports, require, module) {
-  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    
-
-
-    return "<div id=\"presenter\">\r\n\r\n<div class=\"row\">\r\n<h1>Make an Appointment</h1>\r\n</div>\r\n\r\n<div class=\"row\">\r\n<p> To make an appointment for our free collect & return service, simply select your \r\n       region, pick a date that suits, and fill in a few details:</p>\r\n   <p>We begin our collections from 5:30 in the evenings and service the Belfast &amp; \r\n       Downpatrick areas. </p>\r\n        <p>If you include your mobile number we can send you an automatic text when we are \r\n            nearly with you.</p>\r\n        \r\n        \r\n        <div align=left> <span class=\"style1\">Collection Days:<br /><b>Mon &amp; Thur&nbsp;&nbsp;&nbsp; \r\n            </b>&nbsp;5:30pm - 8pm<br />\r\n            <br />\r\n        \r\n    </span>\r\n            For customers outside our service area, or those who would prefer to bring the \r\n            machine to us <strong><span>Mon - Thur</span> </strong>please <span><a href=\"/BringToUs\">\r\n            click here</a><br />\r\n   \r\n    \r\n    \r\n        </div>\r\n        \r\n    </span>\r\n   \r\n   \r\n    \r\n</div>\r\n\r\n\r\n\r\n  <div id=\"appointmentWizard-container\" class=\"row\">\r\n\r\n</div>\r\n\r\n<div>\r\n<img class=\"pull-right pull-down\" src=\"images/bookimage.jpg\" style=\"width: 283px; height: 424px\" /></div>\r\n</div>\r\n\r\n</div>";});
-});
 window.require.register("views/templates/contact/contact", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
@@ -1010,6 +1002,11 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
     return QuickQuoteView;
 
   }).call(this, View);
+  
+});
+window.require.register("views/view-controllers/home/workflow-view", function(exports, require, module) {
+  
+
   
 });
 window.require.register("views/view-controllers/page/footer-view", function(exports, require, module) {
