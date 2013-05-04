@@ -970,11 +970,11 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
         statusCode: {
           422: function() {
             outOfBounds(item);
-            return this.$('#manOnBike').html("<H1> Out of bloody bounds </h1>");
+            return $('#manOnBike').html("<H1> Out of bloody bounds </h1>");
           },
           200: function() {
             inBounds(item);
-            return this.$('#manOnBike').html("<H1> In bloody bounds </h1>");
+            return $('#manOnBike').html("<H1> In bloody bounds </h1>");
           },
           502: function() {
             return showErrorAlert("<strong>Whoops - Something has gone wrong</strong> Please try again.");
