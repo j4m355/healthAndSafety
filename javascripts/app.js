@@ -503,9 +503,9 @@ window.require.register("views/templates/home/services", function(exports, requi
 
 
     buffer += " <div id=\"topRowContent\">\r\n 	<h1>services</h1>\r\n 	<h3>Success ";
-    foundHelper = helpers.success;
+    foundHelper = helpers.inBounds;
     if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
-    else { stack1 = depth0.success; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+    else { stack1 = depth0.inBounds; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
     buffer += escapeExpression(stack1) + "</h3>\r\n </div>";
     return buffer;});
 });
