@@ -488,22 +488,6 @@ window.require.register("views/templates/home/home", function(exports, require, 
 
     return "<div id=\"presenter\">\r\n    <div class=\"row\" id=\"topRow\">      \r\n\r\n    </div>\r\n\r\n\r\n    <div class=\"row\">\r\n      <div class=\"span4 homecols\">\r\n       \r\n                    <div class=\"row\">\r\n                        <a href=\"../aboutus\">\r\n                            <img src=\"/images/promises1.jpg\"  border=\"0\"></a>\r\n                    </div>\r\n\r\n                    <div class=\"row\">                        \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises2.jpg\">\r\n                            </div>\r\n                            <div class=\"span3\">We provide a reliable and affordable <em>Computer repair</em>\r\n                                service in the <em>Belfast</em> area -Why not <a href=\"../Book\"> <strong><em>Book an appointment now</em></strong></a> ?</div>\r\n                    \r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" width=\"232\" height=\"23\">\r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                    \r\n                            <div class=\"span1\">\r\n                                <img alt=\"\" src=\"/images/promises4.jpg\">\r\n                            </div>\r\n\r\n                            <div class=\"span3\">\r\n                                Virus removal - <b>£30</b>\r\n                                <br>\r\n                                Laptop screen fitted - <b>£40</b>\r\n                                <br>\r\n                                Memory Upgrade - <b>£30</b><br>\r\n                                VHS to DVD - <b>£10</b><br>\r\n                                Laptop keyboard fitted - <b>£20</b><br>\r\n                                Xbox &amp; PS3 repair - See <a href=\"../Prices\"><strong><em>Prices</em></strong></a>\r\n                            </div>\r\n\r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                       \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises6.jpg\" width=\"67\" height=\"55\">\r\n                            </div>\r\n\r\n                            <div class=\"span3\">\r\n                                Using our online tracking system you can <i><a href=\"../login\">\r\n                                <strong>track your repair</strong></a></i> 24/7 \r\n                            </div>\r\n                        \r\n                    </div>\r\n\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n\r\n\r\n                    <div class=\"row\">\r\n                       \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises5.jpg\" width=\"67\" height=\"70\">\r\n                            </div>\r\n\r\n                            <div class=\"span3\">We are quite confident we can repair your computer. But in the\r\n                                event we cant fix your machine you <i>wont be charged</i> a penny</div>\r\n                      \r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        \r\n                            <div class=\"span1\">\r\n                                <img src=\"/images/promises3.jpg\" width=\"67\" height=\"72\"></div>\r\n                            <div class=\"span3\">We aim to have your machine back to you within <i>3 working days</i>\r\n                                or sooner. On some jobs we offer an express 24 hour repair service.&nbsp; Get a\r\n                                <strong><em><a href=\"/Quote/NoPostcodeQuote.aspx\">Quick Quote</a></em></strong> to find out if your \r\n                                job qualifies.</div>\r\n                       \r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <img src=\"/images/promises7.jpg\" alt=\"\" width=\"232\" height=\"23\">\r\n                    </div>\r\n              \r\n      </div>\r\n\r\n      <div class=\"span4 homecols moveDown\">        \r\n            <div class=\"row giveUsABorder\">\r\n                    <h5>\r\n                        Virus Removal &amp; Data recovery</h5>\r\n                    Need a virus removal or data recovery service in Belfast?<br>\r\n                    No problem, we offer a range of affordable computer &amp; laptop repair services. We \r\n                    can help you remove viruses from your system and prevent them returning. Unlike \r\n                    some other companies we can work with you to ensure that your most important \r\n                    data is recovered from your hard drive. We also offer an express service on this \r\n                    job, get a <strong><em><a href=\"/Quote/NoPostcodeQuote.aspx\">quick quote</a></em></strong> to find \r\n                    out more.<br>\r\n                    <br>\r\n                    Our cheap virus removal, (format &amp; restore to factory settings) service is only\r\n                    <b>£40</b> or <b>£30</b> if you back up your own files before hand.<br>\r\n                    <br>\r\n                    Our affordable data recovery services start from £30 depending on the size of your\r\n                    hard drive.<br>\r\n                    <br>\r\n                    <img alt=\"\" src=\"/images/virus1.jpg\"><br>\r\n                    <br>\r\n                    <h5>\r\n                        VHS to DVD</h5>\r\n                    <p>\r\n                        Cheap VHS to DVD Conversion Service :\r\n                        <br>\r\n                        For <b>£10</b> per tape we can convert your old VHS into the more versatile DVD\r\n                        format.</p>\r\n                    <p>\r\n                        Camcorder to DVD Conversion Service :\r\n                        <br>\r\n                        For <b>£10</b> per tape we can convert your&nbsp; camcorder tapes into DVD format.</p>\r\n                    <p>\r\n                        &nbsp;<b>£5</b> For any additional copies or <strong>£10</strong> for four copies.</p>\r\n        </div>\r\n        \r\n      </div>\r\n\r\n\r\n\r\n      <div class=\"span4 homecols moveDown\">\r\n        <div class=\"row\">\r\n                    <h5>\r\n                        Laptop Screen Repair</h5>\r\n                    Faulty or cracked laptop screen?\r\n                    <p>\r\n                        Laptop Repair :</p>\r\n                    <p>\r\n                        Laptop screen replacement in Belfast for <b>£40</b>. Get a <a href=\"/Quote/NoPostcodeQuote.aspx\">\r\n                        <strong><em>Quick quote</em></strong></a>\r\n                        to find the full price for your make and model<p>\r\n                            .<img alt=\"\" class=\"laptopman\" src=\"/images/chat1.jpg\" /></p>\r\n                        <h5>\r\n                            XBox DVD Drive Repair</h5>\r\n                        Xbox discs not being read? Faulty xbox disc drive?<br />\r\n                        <br />\r\n                        For an affordable <strong>£60</strong> we offer an Xbox 360 DVD drive replacement\r\n                        service.&nbsp; We use an exact match drive to ensure your xbox does not get banned\r\n                        from live.<br />\r\n                        <br />\r\n                        Turn overtime for this repair depends on our supplier having the part. It takes\r\n                        us a day to switch the drive. Typical turn over 3-5 working days.\r\n                        <br />\r\n                        <a href=\"../Book\"><strong><em>Book an appointment now</em></strong></a>\r\n            </div>\r\n\r\n      </div>\r\n\r\n    </div>\r\n\r\n</div>";});
 });
-window.require.register("views/templates/home/inbound", function(exports, require, module) {
-  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    
-
-
-    return "<div id=\"topRowContent\">\r\n<h1> in</h1>\r\n</div>";});
-});
-window.require.register("views/templates/home/outbound", function(exports, require, module) {
-  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    
-
-
-    return "<div id=\"topRowContent\">\r\n<h1> outbound</h1>\r\n</div>";});
-});
 window.require.register("views/templates/home/quickQuote", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
@@ -511,6 +495,19 @@ window.require.register("views/templates/home/quickQuote", function(exports, req
 
 
     return " <div id=\"topRowContent\">\r\n<div id=\"view\" class=\"span12\">\r\n<div id=\"spinner\" class=\"pagination-centered\"></div>\r\n</div>\r\n<div id=\"manOnBike\"></div>\r\n </div>";});
+});
+window.require.register("views/templates/home/services", function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+    buffer += " <div id=\"topRowContent\">\r\n 	<h1>services</h1>\r\n 	<h3>Success ";
+    foundHelper = helpers.success;
+    if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+    else { stack1 = depth0.success; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+    buffer += escapeExpression(stack1) + "</h3>\r\n </div>";
+    return buffer;});
 });
 window.require.register("views/templates/page/footer", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -812,9 +809,7 @@ window.require.register("views/view-controllers/home/carousel-view", function(ex
         postcode = $('#postcodeBox').val();
         if (validate(postcode)) {
           this.$el.fadeOut();
-          new QuickQuoteView();
-          mediator.publish("quickQuoteView", postcode);
-          return this.dispose;
+          return mediator.publish("closeCarouselView", postcode);
         }
       }
     };
@@ -860,7 +855,7 @@ window.require.register("views/view-controllers/home/carousel-view", function(ex
   
 });
 window.require.register("views/view-controllers/home/home-page-view", function(exports, require, module) {
-  var CarouselView, HomePageView, View, mediator, template,
+  var CarouselView, HomePageView, QuickQuoteView, ServicesView, View, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -873,11 +868,17 @@ window.require.register("views/view-controllers/home/home-page-view", function(e
 
   CarouselView = require('./carousel-view');
 
+  QuickQuoteView = require('views/view-controllers/home/quickQuote-view');
+
+  ServicesView = require('views/view-controllers/home/services-view');
+
   module.exports = HomePageView = (function(_super) {
 
     __extends(HomePageView, _super);
 
     function HomePageView() {
+      this.closeQuickQuoteView = __bind(this.closeQuickQuoteView, this);
+      this.closeCarouselView = __bind(this.closeCarouselView, this);
       this.render = __bind(this.render, this);
       this.initialize = __bind(this.initialize, this);
       HomePageView.__super__.constructor.apply(this, arguments);
@@ -892,16 +893,43 @@ window.require.register("views/view-controllers/home/home-page-view", function(e
     HomePageView.prototype.template = template;
 
     HomePageView.prototype.initialize = function() {
-      return HomePageView.__super__.initialize.apply(this, arguments);
+      HomePageView.__super__.initialize.apply(this, arguments);
+      mediator.subscribe("closeCarouselView", this.closeCarouselView);
+      return mediator.subscribe("closeQuickQuoteView", this.closeQuickQuoteView);
     };
 
     HomePageView.prototype.render = function() {
+      var carouselView;
       this.$el.hide();
       HomePageView.__super__.render.apply(this, arguments);
-      new CarouselView({
+      carouselView = new CarouselView({
+        autoRender: true,
         container: this.$("#topRow")
       });
+      this.subview('carouselView', carouselView);
       return this.$el.fadeIn();
+    };
+
+    HomePageView.prototype.closeCarouselView = function(postcode) {
+      var quickQuoteView;
+      this.removeSubview(this.carouselView);
+      quickQuoteView = new QuickQuoteView({
+        autoRender: true,
+        container: this.$("#topRow")
+      });
+      this.subview('quickQuoteView', quickQuoteView);
+      return mediator.publish("quickQuoteViewLoad", postcode);
+    };
+
+    HomePageView.prototype.closeQuickQuoteView = function(success) {
+      var servicesView;
+      this.removeSubview(this.quickQuoteView);
+      servicesView = new ServicesView({
+        autoRender: true,
+        container: this.$("#topRow")
+      });
+      this.subView('servicesView', servicesView);
+      return mediator.publish("servicesViewLoad", success);
     };
 
     return HomePageView;
@@ -909,90 +937,8 @@ window.require.register("views/view-controllers/home/home-page-view", function(e
   })(View);
   
 });
-window.require.register("views/view-controllers/home/inbound-view", function(exports, require, module) {
-  var InboundView, View, mediator, template,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  template = require('views/templates/home/inbound');
-
-  View = require('views/base/view');
-
-  mediator = require('mediator');
-
-  module.exports = InboundView = (function(_super) {
-
-    __extends(InboundView, _super);
-
-    function InboundView() {
-      this.render = __bind(this.render, this);
-      this.initialize = __bind(this.initialize, this);
-      InboundView.__super__.constructor.apply(this, arguments);
-    }
-
-    InboundView.prototype.autoRender = true;
-
-    InboundView.prototype.container = '#topRow';
-
-    InboundView.prototype.template = template;
-
-    InboundView.prototype.initialize = function() {
-      return InboundView.__super__.initialize.apply(this, arguments);
-    };
-
-    InboundView.prototype.render = function() {
-      return InboundView.__super__.render.apply(this, arguments);
-    };
-
-    return InboundView;
-
-  })(View);
-  
-});
-window.require.register("views/view-controllers/home/outbound-view", function(exports, require, module) {
-  var OutboundView, View, mediator, template,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  template = require('views/templates/home/outbound');
-
-  View = require('views/base/view');
-
-  mediator = require('mediator');
-
-  module.exports = OutboundView = (function(_super) {
-
-    __extends(OutboundView, _super);
-
-    function OutboundView() {
-      this.render = __bind(this.render, this);
-      this.initialize = __bind(this.initialize, this);
-      OutboundView.__super__.constructor.apply(this, arguments);
-    }
-
-    OutboundView.prototype.autoRender = true;
-
-    OutboundView.prototype.container = '#topRow';
-
-    OutboundView.prototype.template = template;
-
-    OutboundView.prototype.initialize = function() {
-      return OutboundView.__super__.initialize.apply(this, arguments);
-    };
-
-    OutboundView.prototype.render = function() {
-      return OutboundView.__super__.render.apply(this, arguments);
-    };
-
-    return OutboundView;
-
-  })(View);
-  
-});
 window.require.register("views/view-controllers/home/quickQuote-view", function(exports, require, module) {
-  var InboundView, OutboundView, QuickQuoteView, Spinner, View, denzel, mediator, template,
+  var QuickQuoteView, Spinner, View, denzel, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1004,10 +950,6 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
   mediator = require('mediator');
 
   Spinner = components('spin.js');
-
-  InboundView = require('views/view-controllers/home/inbound-view');
-
-  OutboundView = require('views/view-controllers/home/outbound-view');
 
   denzel = new Spinner({
     color: '#e5e5e5',
@@ -1046,7 +988,7 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
 
     QuickQuoteView.prototype.initialize = function() {
       QuickQuoteView.__super__.initialize.apply(this, arguments);
-      return mediator.subscribe("quickQuoteView", this.postcodeSearch);
+      return mediator.subscribe("quickQuoteViewLoad", this.postcodeSearch);
     };
 
     QuickQuoteView.prototype.render = function() {
@@ -1079,23 +1021,24 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
         },
         error: function(jqXhr, textStatus, errorThrown) {
           return console.log(errorThrown);
-        },
-        complete: function() {
-          return denzel.stop();
         }
+        /*complete: ()->        
+          denzel.stop()
+        */
+
       });
     };
 
     outOfBounds = function(postcode) {
-      new OutboundView();
-      console.log("out of bounds " + postcode);
-      return QuickQuoteView.dispose;
+      denzel.stop();
+      mediator.publish('closeQuickQuoteView', postcode);
+      return console.log("out of bounds " + postcode);
     };
 
     inBounds = function(postcode) {
-      new InboundView();
-      console.log("in bounds " + postcode);
-      return QuickQuoteView.dispose;
+      denzel.stop();
+      mediator.publish('closeQuickQuoteView', postcode);
+      return console.log("in bounds " + postcode);
     };
 
     QuickQuoteView.prototype.closeLoginErrorAlert = function() {
@@ -1110,6 +1053,53 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
     return QuickQuoteView;
 
   }).call(this, View);
+  
+});
+window.require.register("views/view-controllers/home/services-view", function(exports, require, module) {
+  var InboundView, View, mediator, template,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  template = require('views/templates/home/services');
+
+  View = require('views/base/view');
+
+  mediator = require('mediator');
+
+  module.exports = InboundView = (function(_super) {
+
+    __extends(InboundView, _super);
+
+    function InboundView() {
+      this.whatToRender = __bind(this.whatToRender, this);
+      this.render = __bind(this.render, this);
+      this.initialize = __bind(this.initialize, this);
+      InboundView.__super__.constructor.apply(this, arguments);
+    }
+
+    InboundView.prototype.autoRender = true;
+
+    InboundView.prototype.container = '#topRow';
+
+    InboundView.prototype.template = template;
+
+    InboundView.prototype.initialize = function() {
+      InboundView.__super__.initialize.apply(this, arguments);
+      return mediator.subscribe("servicesViewLoad", this.whatToRender);
+    };
+
+    InboundView.prototype.render = function() {
+      return InboundView.__super__.render.apply(this, arguments);
+    };
+
+    InboundView.prototype.whatToRender = function(inBounds) {
+      return console.log(inBounds);
+    };
+
+    return InboundView;
+
+  })(View);
   
 });
 window.require.register("views/view-controllers/page/footer-view", function(exports, require, module) {
