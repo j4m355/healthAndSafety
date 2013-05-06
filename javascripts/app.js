@@ -323,6 +323,26 @@ window.require.register("models/base/model", function(exports, require, module) 
   })(Chaplin.Model);
   
 });
+window.require.register("models/postcode", function(exports, require, module) {
+  var Model, Postcode,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  Model = require('models/base/model');
+
+  module.exports = Postcode = (function(_super) {
+
+    __extends(Postcode, _super);
+
+    function Postcode() {
+      Postcode.__super__.constructor.apply(this, arguments);
+    }
+
+    return Postcode;
+
+  })(Model);
+  
+});
 window.require.register("routes", function(exports, require, module) {
   
   module.exports = function(match) {
@@ -491,10 +511,23 @@ window.require.register("views/templates/home/home", function(exports, require, 
 window.require.register("views/templates/home/quickQuote", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
+    var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+  function program1(depth0,data) {
     
+    
+    return "\r\n						<strong>Collect and return</strong><br>\r\n						";}
 
-
-    return " <div id=\"topRowContent\">\r\n\r\n\r\n<div id=\"wizard\" class=\"wizard-default-style js\">\r\n		\r\n	\r\n		<ul class=\"steps\">\r\n			<li>Step 1</li>\r\n			<li>Step 2</li>\r\n		</ul>\r\n\r\n		\r\n		<!-- Step Content Container -->\r\n		<div class=\"step_content\">\r\n			\r\n			<!-- Wizard - Step 1 -->\r\n			<div id=\"step-1\" class=\"step one_column\">\r\n				\r\n				<div class=\"column_one\">\r\n					dfs\r\n				</div>\r\n				\r\n			</div>\r\n\r\n	\r\n			<div id=\"step-1\" class=\"step two_column\">\r\n				\r\n				<div class=\"column_one\">\r\n				dsfds\r\n				</div>\r\n				\r\n				<div class=\"column_two\">\r\n			sdfds\r\n				</div>\r\n				\r\n			</div>\r\n	\r\n			\r\n		</div>\r\n\r\n		\r\n		\r\n</div>\r\n\r\n </div>";});
+    buffer += " <div id=\"topRowContent\">\r\n\r\n\r\n<div id=\"wizard\" class=\"wizard-default-style js\">\r\n		\r\n	\r\n		<ul class=\"steps\">\r\n			<li>Services</li>\r\n			<li>Problem</li>\r\n			<li>Quote</li>\r\n			<li>Appointment</li>\r\n		</ul>\r\n\r\n		\r\n		<!-- Step Content Container -->\r\n		<div class=\"step_content\">\r\n			\r\n			<!-- Wizard - Step 1 -->\r\n			<div id=\"step-1\" class=\"step two_column\">\r\n				\r\n				<div id=\"help-whatisthis\" class=\"helper\">\r\n		    <div class=\"text\">\r\n		    	<h3>Helper Title</h3>\r\n		    	<p>Helper Description!</p>\r\n		    </div>\r\n		</div>\r\n				<div class=\"column_one\">\r\n					<p>The following services are available in <strong>";
+    foundHelper = helpers.postcode;
+    if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+    else { stack1 = depth0.postcode; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+    buffer += escapeExpression(stack1) + "</strong>:</p><br>\r\n						<strong>Bring to Us </strong><br>\r\n						";
+    stack1 = depth0.inbounds;
+    stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\r\n\r\n						\r\n				</div>\r\n\r\n				<div class=\"column_two\">\r\n					<p>When me and the guys were at church last week we noticed that there was a car on the website</p>\r\n				</div>\r\n\r\n				\r\n			</div>\r\n\r\n	\r\n			<div id=\"step-1\" class=\"step two_column\">\r\n				\r\n				<div class=\"column_one\">\r\n				<p>Its funny - sometimes people show faces to other people</p>\r\n				</div>\r\n				\r\n				<div class=\"column_two\">\r\n					<p>When me and the guys were at church last week we noticed that there was a car on the website</p>\r\n				</div>\r\n				\r\n			</div>\r\n	\r\n			\r\n		</div>\r\n\r\n		\r\n		\r\n</div>\r\n\r\n </div>";
+    return buffer;});
 });
 window.require.register("views/templates/page/footer", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -826,7 +859,6 @@ window.require.register("views/view-controllers/home/carousel-view", function(ex
 
     validatePostcode = function(postcode) {
       var belfastPostcode, postcodeRegEx;
-      console.log(postcode);
       postcodeRegEx = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) {0,1}[0-9][A-Za-z]{2})$/;
       belfastPostcode = /^([Bb][Tt])/;
       if (belfastPostcode.test(postcode)) {
@@ -842,7 +874,7 @@ window.require.register("views/view-controllers/home/carousel-view", function(ex
   
 });
 window.require.register("views/view-controllers/home/home-page-view", function(exports, require, module) {
-  var CarouselView, HomePageView, QuickQuoteView, View, mediator, template,
+  var CarouselView, HomePageView, PostcodeModel, QuickQuoteView, View, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -853,11 +885,15 @@ window.require.register("views/view-controllers/home/home-page-view", function(e
 
   mediator = require('mediator');
 
+  PostcodeModel = require('models/postcode');
+
   CarouselView = require('./carousel-view');
 
   QuickQuoteView = require('views/view-controllers/home/quickQuote-view');
 
   module.exports = HomePageView = (function(_super) {
+    var postcodeSearch, validatePostcode,
+      _this = this;
 
     __extends(HomePageView, _super);
 
@@ -896,16 +932,19 @@ window.require.register("views/view-controllers/home/home-page-view", function(e
     };
 
     HomePageView.prototype.closeCarouselView = function(postcode) {
-      var quickQuoteView;
+      var item, postcodeInRange, quickQuoteView;
       this.removeSubview(this.carouselView);
-      console.log("hester");
+      postcodeInRange = postcodeSearch(postcode);
+      item = new PostcodeModel({
+        postcode: postcode,
+        inbounds: postcodeInRange
+      });
       quickQuoteView = new QuickQuoteView({
         autoRender: true,
-        container: this.$("#topRow")
+        container: this.$("#topRow"),
+        model: item
       });
-      console.log("gonzales");
-      this.subview('quickQuoteView', quickQuoteView);
-      return mediator.publish("quickQuoteViewLoad", postcode);
+      return this.subview('quickQuoteView', quickQuoteView);
     };
 
     HomePageView.prototype.closeQuickQuoteView = function(success) {
@@ -919,13 +958,45 @@ window.require.register("views/view-controllers/home/home-page-view", function(e
       return mediator.publish("servicesViewLoad", success);
     };
 
+    postcodeSearch = function(item) {
+      if (validatePostcode(item)) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    validatePostcode = function(postcode) {
+      var answer, positionOfLastTwo, removeWhite, trimStart;
+      HomePageView.model = new PostcodeModel({
+        postcode: postcode
+      });
+      removeWhite = postcode.replace(" ", "");
+      trimStart = removeWhite.substr(2);
+      positionOfLastTwo = trimStart.length - 2;
+      answer = trimStart.substr(0, positionOfLastTwo);
+      if (answer < 110) {
+        HomePageView.model.set({
+          inbounds: true
+        });
+        console.log(HomePageView.model.attributes);
+        return true;
+      } else {
+        HomePageView.model.set({
+          inbounds: false
+        });
+        console.log(HomePageView.model.attributes);
+        return false;
+      }
+    };
+
     return HomePageView;
 
-  })(View);
+  }).call(this, View);
   
 });
 window.require.register("views/view-controllers/home/quickQuote-view", function(exports, require, module) {
-  var QuickQuoteView, Spinner, View, mediator, template,
+  var PostcodeModel, QuickQuoteView, Spinner, View, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -938,15 +1009,13 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
 
   Spinner = components('spin.js');
 
+  PostcodeModel = require('models/postcode');
+
   module.exports = QuickQuoteView = (function(_super) {
-    var inBounds, outOfBounds, showErrorAlert, validatePostcode,
-      _this = this;
 
     __extends(QuickQuoteView, _super);
 
     function QuickQuoteView() {
-      this.closeLoginErrorAlert = __bind(this.closeLoginErrorAlert, this);
-      this.postcodeSearch = __bind(this.postcodeSearch, this);
       this.render = __bind(this.render, this);
       this.initialize = __bind(this.initialize, this);
       QuickQuoteView.__super__.constructor.apply(this, arguments);
@@ -959,8 +1028,7 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
     QuickQuoteView.prototype.template = template;
 
     QuickQuoteView.prototype.initialize = function() {
-      QuickQuoteView.__super__.initialize.apply(this, arguments);
-      return mediator.subscribe("quickQuoteViewLoad", this.postcodeSearch);
+      return QuickQuoteView.__super__.initialize.apply(this, arguments);
     };
 
     QuickQuoteView.prototype.render = function() {
@@ -968,49 +1036,54 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
       return this.$("#wizard").wizardPro();
     };
 
-    QuickQuoteView.prototype.postcodeSearch = function(item) {
-      this.closeLoginErrorAlert();
-      if (validatePostcode(item)) {
-        return inBounds(item);
-      } else {
-        return outOfBounds(item);
-      }
-    };
+    /*postcodeSearch:(item)=> 
+      @closeLoginErrorAlert()
+      if validatePostcode(item)
+        inBounds(item)
+      else
+        outOfBounds(item)
+    */
 
-    validatePostcode = function(postcode) {
-      var answer, positionOfLastTwo, removeWhite, trimStart;
-      console.log(postcode);
-      removeWhite = postcode.replace(" ", "");
-      trimStart = removeWhite.substr(2);
-      positionOfLastTwo = trimStart.length - 2;
-      answer = trimStart.substr(0, positionOfLastTwo);
-      if (answer < 110) {
-        return true;
-      } else {
-        return false;
-      }
-    };
 
-    outOfBounds = function(postcode) {
-      return console.log("out of bounds " + postcode);
-    };
+    /*validatePostcode = (postcode)=>
+      @model = new PostcodeModel({postcode : postcode}) 
+      removeWhite = postcode.replace(" ", "")
+      trimStart = removeWhite.substr(2)
+      positionOfLastTwo = trimStart.length - 2
+      answer = trimStart.substr(0,positionOfLastTwo)
+      if answer < 110
+        @model.set({inbounds : true})
+        console.log @model.attributes 
+        return true
+      else
+        @model.set({inbounds : false})
+        console.log @model.attributes
+        return false
+    */
 
-    inBounds = function(postcode) {
-      return console.log("in bounds " + postcode);
-    };
 
-    QuickQuoteView.prototype.closeLoginErrorAlert = function() {
-      return this.$('#validPostcode').hide();
-    };
+    /*outOfBounds = (postcode)=>
+      console.log "out of bounds " + postcode
+    
+    inBounds = (postcode)=>
+      console.log "in bounds " +  postcode
+    */
 
-    showErrorAlert = function(message) {
-      $('#postcodeResult').html(message);
-      return $('#validPostcode').show();
-    };
+
+    /*closeLoginErrorAlert:()=>
+      @$('#validPostcode').hide()
+    */
+
+
+    /*showErrorAlert = (message)=>
+      $('#postcodeResult').html(message)
+      $('#validPostcode').show()
+    */
+
 
     return QuickQuoteView;
 
-  }).call(this, View);
+  })(View);
   
 });
 window.require.register("views/view-controllers/page/footer-view", function(exports, require, module) {

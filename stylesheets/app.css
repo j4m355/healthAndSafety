@@ -806,6 +806,14 @@ h5 {
   padding-left: 45%;
   padding-top: 70px;
 }
+.current {
+  padding-right: 50px !important;
+  padding-left: 10px !important;
+}
+.steps > li {
+  padding-right: 50px !important;
+  padding-left: 10px !important;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
