@@ -526,7 +526,7 @@ window.require.register("views/templates/home/quickQuote", function(exports, req
   function program5(depth0,data) {
     
     
-    return "<li>\r\n						<strong>Collect and return</strong><br>\r\n						</li>";}
+    return "<li>\r\n						<a class=\"btn btn-warning\">Collect and return</a></strong><br>\r\n						</li>";}
 
     buffer += " <div id=\"topRowContent\">\r\n\r\n\r\n<div id=\"wizard\" class=\"wizard-default-style js view\">\r\n		\r\n	\r\n		<ul class=\"steps\">\r\n			<li>Services</li>\r\n			<li>Problem</li>\r\n			<li>Quote</li>\r\n			<li>Appointment</li>\r\n		</ul>\r\n\r\n		\r\n		<!-- Step Content Container -->\r\n		<div class=\"step_content\">\r\n			\r\n			<!-- Wizard - Step 1 -->\r\n			<div id=\"step-1\" class=\"step two_column row\">\r\n				\r\n<div class=\"container\">\r\n\r\n<div class=\"row\">\r\n\r\n       <div class=\"span9\">\r\n           <div class=\"row\">\r\n         <div class=\"span5 pull-right\">\r\n         	";
     stack1 = depth0.inbounds;
@@ -540,7 +540,7 @@ window.require.register("views/templates/home/quickQuote", function(exports, req
     foundHelper = helpers.postcode;
     if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
     else { stack1 = depth0.postcode; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-    buffer += escapeExpression(stack1) + "</strong>:</p><br>\r\n					<ul>\r\n						<li><strong>Bring to Us </strong></li>\r\n						";
+    buffer += escapeExpression(stack1) + "</strong>:</p><br>\r\n					<ul>\r\n						<li><a class=\"btn btn-warning\">Bring to Us</a> </li>\r\n						";
     stack1 = depth0.inbounds;
     stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(5, program5, data)});
     if(stack1 || stack1 === 0) { buffer += stack1; }
