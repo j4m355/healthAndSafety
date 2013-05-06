@@ -800,7 +800,7 @@ h5 {
   color: #ffa500;
 }
 .view {
-  min-height: 240px;
+  min-height: 340px !important;
 }
 #spinner {
   padding-left: 45%;
@@ -819,6 +819,11 @@ h5 {
 }
 #PostCodeRegion {
   background: url("/images/topleftstarted.jpg") no-repeat;
+}
+.services {
+  margin-left: 10px;
+  padding-left: 50px;
+  padding-top: 70px;
 }
 /* ==========================================================================
    Helper classes
