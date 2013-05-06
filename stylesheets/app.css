@@ -799,7 +799,7 @@ body {
 h5 {
   color: #ffa500;
 }
-#view {
+.view {
   min-height: 240px;
 }
 #spinner {
@@ -816,6 +816,9 @@ h5 {
 }
 .full-height {
   height: 100%;
+}
+#PostCodeRegion {
+  background: url("/images/topleftstarted.jpg") no-repeat;
 }
 /* ==========================================================================
    Helper classes

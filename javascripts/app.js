@@ -528,7 +528,7 @@ window.require.register("views/templates/home/quickQuote", function(exports, req
     
     return "<li>\r\n						<strong>Collect and return</strong><br>\r\n						</li>";}
 
-    buffer += " <div id=\"topRowContent\">\r\n\r\n\r\n<div id=\"wizard\" class=\"wizard-default-style js\">\r\n		\r\n	\r\n		<ul class=\"steps\">\r\n			<li>Services</li>\r\n			<li>Problem</li>\r\n			<li>Quote</li>\r\n			<li>Appointment</li>\r\n		</ul>\r\n\r\n		\r\n		<!-- Step Content Container -->\r\n		<div class=\"step_content\">\r\n			\r\n			<!-- Wizard - Step 1 -->\r\n			<div id=\"step-1\" class=\"step two_column row\">\r\n				\r\n<div class=\"container\">\r\n\r\n<div class=\"row\">\r\n\r\n       <div class=\"span9\">\r\n           <div class=\"row\">\r\n         <div class=\"span6 pull-right\">";
+    buffer += " <div id=\"topRowContent\" >\r\n\r\n\r\n<div id=\"wizard\" class=\"wizard-default-style js view\">\r\n		\r\n	\r\n		<ul class=\"steps\">\r\n			<li>Services</li>\r\n			<li>Problem</li>\r\n			<li>Quote</li>\r\n			<li>Appointment</li>\r\n		</ul>\r\n\r\n		\r\n		<!-- Step Content Container -->\r\n		<div class=\"step_content\">\r\n			\r\n			<!-- Wizard - Step 1 -->\r\n			<div id=\"step-1\" class=\"step two_column row\">\r\n				\r\n<div class=\"container\">\r\n\r\n<div class=\"row\">\r\n\r\n       <div class=\"span9\">\r\n           <div class=\"row\">\r\n         <div class=\"span6 pull-right\">";
     stack1 = depth0.inbounds;
     stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data)});
     if(stack1 || stack1 === 0) { buffer += stack1; }
@@ -536,7 +536,7 @@ window.require.register("views/templates/home/quickQuote", function(exports, req
     stack1 = depth0.inbounds;
     stack1 = helpers.unless.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(3, program3, data)});
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\r\n				</div>\r\n\r\n          <div class=\"span3\"><div class=\"alert full-height\">\r\n					<p>The following services are available in <strong>";
+    buffer += "\r\n				</div>\r\n\r\n          <div class=\"span3\"><div id=\"PostCodeRegion\" class=\"full-height view\">\r\n					<p>The following services are available in <strong>";
     foundHelper = helpers.postcode;
     if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
     else { stack1 = depth0.postcode; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
@@ -945,8 +945,7 @@ window.require.register("views/view-controllers/home/home-page-view", function(e
         autoRender: true,
         container: this.$("#topRow")
       });
-      this.subview('carouselView', carouselView);
-      return this.$el.fadeIn();
+      return this.subview('carouselView', carouselView);
     };
 
     HomePageView.prototype.closeCarouselView = function(postcode) {
