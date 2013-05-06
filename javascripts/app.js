@@ -470,7 +470,7 @@ window.require.register("views/templates/contact/contact", function(exports, req
     
 
 
-    return "<div id=\"presenter\">\r\n\r\n<h1>Contact us</h1>\r\n<p>\r\n        By clicking on the chat icon below you can see if one of our team are online to\r\n        talk to you there and then about your issue.&nbsp;</p>\r\n        <p>\r\n            Livehelp chat is:\r\n        </p>\r\n        <!--<div id=\"apDiv14\">\r\n            <!-- stardevelop.com Live Help International Copyright - All Rights Reserved //-->\r\n            <!-- BEGIN Live Help HTML Code - NOT PERMITTED TO MODIFY IMAGE MAP/CODE/LINKS //-->\r\n            <a href=\"http://www.drpcni.com/livehelp/index.php\" target=\"_blank\" onclick=\"openLiveHelp(); return false\">\r\n                <img src=\"http://www.drpcni.com/livehelp/include/status.php\" id=\"LiveHelpStatus\" name=\"LiveHelpStatus\"\r\n                    border=\"0\" alt=\"Live Help\" onload=\"statusImagesLiveHelp[statusImagesLiveHelp.length] = this;\" /></a>\r\n            <!-- END Live Help HTML -->\r\n        </div>-->\r\n        <p style=\"font-size: xx-small\">\r\n            (Click to continue)</p>\r\n        <p>\r\n            &nbsp;</p>\r\n        <p>\r\n            If you prefer you can leave us a quick <b><em>offline message</em></b> and we will get back to you.</p>\r\n       \r\n        <div class=\"row\">\r\n            \r\n			\r\n\r\n\r\n\r\n<div id=\"contactSuccess\" class=\"alert alert-success\" data-alert=\"alert\" target=\"#\">\r\n    <a class=\"close\" id=\"closeSuccess\">x</a>\r\n <div id=\"successMessage\"><p> <strong>Thank you for your message we will be in touch soon. </strong>Please check your junk mail just in case.</P></div>\r\n</div>\r\n\r\n<div id=\"contactError\" class=\"alert alert-error\" data-alert=\"alert\" target=\"#\">\r\n    <a class=\"close\" id=\"closeError\">x</a>\r\n <div id=\"errorMessage\"><p> <strong>Oops somethign has gone wrong. </strong>Please contact us on 07519746777 and we can sort you out.</P></div>\r\n</div>\r\n			<form id=\"ContactForm\" class=\"form-horizontal\">\r\n			  <div class=\"control-group\">\r\n			    <label class=\"control-label\" for=\"inputEmail\">Your Name</label>\r\n			    <div class=\"controls\">\r\n			      <input type=\"text\" id=\"contactName\" name=\"contactName\" placeholder=\"Your Name\">\r\n			    </div>\r\n			  </div>\r\n			    <div class=\"control-group\">\r\n			    <label class=\"control-label\" for=\"contactEmail\">Email or Phone</label>\r\n			    <div class=\"controls\">\r\n			      <input type=\"text\" id=\"contactEmail\" name=\"contactEmail\" placeholder=\"Email or Phone\">\r\n			    </div>\r\n			  </div>\r\n			  <div class=\"control-group\">\r\n			    <label class=\"control-label\" for=\"contactMessage\">Query</label>\r\n			    <div class=\"controls\">\r\n			      <textarea type=\"text\" id=\"contactMessage\" name=\"contactMessage\" rows=\"3\" placeholder=\"Query\"/>\r\n			    </div>\r\n			  </div>\r\n			  <div class=\"control-group\">\r\n			  	<label class=\"control-label\" for=\"inputDropDown\">How did you find us?</label>\r\n			  	<div class=\"controls\">\r\n			  		<select id=\"contactSource\" name=\"ContactSource\">\r\n  						<option>--Please Select--</option>\r\n  						<option>Google</option>\r\n  						<option>Returning Customer</option>\r\n  						<option>Other Website</option>\r\n  						<option>Other</option>\r\n					</select>\r\n			  	</div>\r\n			  </div>\r\n			  <div class=\"control-group\">\r\n			    <div class=\"controls\">			     \r\n			      <a id=\"submitContact\" class=\"btn\">Send</a>\r\n			    </div>\r\n			  </div>\r\n			</form>\r\n            \r\n    \r\n            <p style=\"text-align: left\">\r\n                Alternatively you can contact us by:</p>\r\n            <p style=\"text-align: left\">\r\n                Email: <a href=\"mailto:doctor@drpcni.com\">doctor@drpcni.com</strong></a></p>\r\n            <p style=\"text-align: left\">\r\n                Telephone: 07519746777\r\n            </p>\r\n            <p style=\"text-align: left\">\r\n                <span style=\"text-align: left\">If we cannot take your call there and then, please leave\r\n                    a message and we will reply as soon as possible</span>.\r\n            </p>\r\n        </div>\r\n\r\n</div>";});
+    return "<div id=\"presenter\">\r\n\r\n<h1>Contact us</h1>\r\n<p>\r\n        By clicking on the chat icon below you can see if one of our team are online to\r\n        talk to you there and then about your issue.&nbsp;</p>\r\n        <p>\r\n            Livehelp chat is:\r\n        </p>\r\n        <!--<div id=\"apDiv14\">\r\n           \r\n           \r\n            <a href=\"http://www.drpcni.com/livehelp/index.php\" target=\"_blank\" onclick=\"openLiveHelp(); return false\">\r\n                <img src=\"http://www.drpcni.com/livehelp/include/status.php\" id=\"LiveHelpStatus\" name=\"LiveHelpStatus\"\r\n                    border=\"0\" alt=\"Live Help\" onload=\"statusImagesLiveHelp[statusImagesLiveHelp.length] = this;\" /></a>\r\n           \r\n        </div>-->\r\n        <p style=\"font-size: xx-small\">\r\n            (Click to continue)</p>\r\n        <p>\r\n            &nbsp;</p>\r\n        <p>\r\n            If you prefer you can leave us a quick <b><em>offline message</em></b> and we will get back to you.</p>\r\n       \r\n        <div class=\"row\">\r\n            \r\n			\r\n\r\n\r\n\r\n<div id=\"contactSuccess\" class=\"alert alert-success\" data-alert=\"alert\" target=\"#\">\r\n    <a class=\"close\" id=\"closeSuccess\">x</a>\r\n <div id=\"successMessage\"><p> <strong>Thank you for your message we will be in touch soon. </strong>Please check your junk mail just in case.</P></div>\r\n</div>\r\n\r\n<div id=\"contactError\" class=\"alert alert-error\" data-alert=\"alert\" target=\"#\">\r\n    <a class=\"close\" id=\"closeError\">x</a>\r\n <div id=\"errorMessage\"><p> <strong>Oops somethign has gone wrong. </strong>Please contact us on 07519746777 and we can sort you out.</P></div>\r\n</div>\r\n			<form id=\"ContactForm\" class=\"form-horizontal\">\r\n			  <div class=\"control-group\">\r\n			    <label class=\"control-label\" for=\"inputEmail\">Your Name</label>\r\n			    <div class=\"controls\">\r\n			      <input type=\"text\" id=\"contactName\" name=\"contactName\" placeholder=\"Your Name\">\r\n			    </div>\r\n			  </div>\r\n			    <div class=\"control-group\">\r\n			    <label class=\"control-label\" for=\"contactEmail\">Email or Phone</label>\r\n			    <div class=\"controls\">\r\n			      <input type=\"text\" id=\"contactEmail\" name=\"contactEmail\" placeholder=\"Email or Phone\">\r\n			    </div>\r\n			  </div>\r\n			  <div class=\"control-group\">\r\n			    <label class=\"control-label\" for=\"contactMessage\">Query</label>\r\n			    <div class=\"controls\">\r\n			      <textarea type=\"text\" id=\"contactMessage\" name=\"contactMessage\" rows=\"3\" placeholder=\"Query\"/>\r\n			    </div>\r\n			  </div>\r\n			  <div class=\"control-group\">\r\n			  	<label class=\"control-label\" for=\"inputDropDown\">How did you find us?</label>\r\n			  	<div class=\"controls\">\r\n			  		<select id=\"contactSource\" name=\"ContactSource\">\r\n  						<option>--Please Select--</option>\r\n  						<option>Google</option>\r\n  						<option>Returning Customer</option>\r\n  						<option>Other Website</option>\r\n  						<option>Other</option>\r\n					</select>\r\n			  	</div>\r\n			  </div>\r\n			  <div class=\"control-group\">\r\n			    <div class=\"controls\">			     \r\n			      <a id=\"submitContact\" class=\"btn\">Send</a>\r\n			    </div>\r\n			  </div>\r\n			</form>\r\n            \r\n    \r\n            <p style=\"text-align: left\">\r\n                Alternatively you can contact us by:</p>\r\n            <p style=\"text-align: left\">\r\n                Email: <a href=\"mailto:doctor@drpcni.com\">doctor@drpcni.com</strong></a></p>\r\n            <p style=\"text-align: left\">\r\n                Telephone: 07519746777\r\n            </p>\r\n            <p style=\"text-align: left\">\r\n                <span style=\"text-align: left\">If we cannot take your call there and then, please leave\r\n                    a message and we will reply as soon as possible</span>.\r\n            </p>\r\n        </div>\r\n\r\n</div>";});
 });
 window.require.register("views/templates/home/carousel", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -494,20 +494,7 @@ window.require.register("views/templates/home/quickQuote", function(exports, req
     
 
 
-    return " <div id=\"topRowContent\">\r\n<div id=\"view\" class=\"span12\">\r\n<div id=\"spinner\" class=\"pagination-centered\"></div>\r\n</div>\r\n<div id=\"manOnBike\"></div>\r\n </div>";});
-});
-window.require.register("views/templates/home/services", function(exports, require, module) {
-  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-    helpers = helpers || Handlebars.helpers;
-    var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
-
-
-    buffer += " <div id=\"topRowContent\">\r\n 	<h1>services</h1>\r\n 	<h3>Success ";
-    foundHelper = helpers.inBounds;
-    if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
-    else { stack1 = depth0.inBounds; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-    buffer += escapeExpression(stack1) + "</h3>\r\n </div>";
-    return buffer;});
+    return " <div id=\"topRowContent\">\r\n\r\n\r\n<div id=\"wizard\" class=\"wizard-default-style js\">\r\n		\r\n	\r\n		<ul class=\"steps\">\r\n			<li>Step 1</li>\r\n			<li>Step 2</li>\r\n		</ul>\r\n\r\n		\r\n		<!-- Step Content Container -->\r\n		<div class=\"step_content\">\r\n			\r\n			<!-- Wizard - Step 1 -->\r\n			<div id=\"step-1\" class=\"step one_column\">\r\n				\r\n				<div class=\"column_one\">\r\n					dfs\r\n				</div>\r\n				\r\n			</div>\r\n\r\n	\r\n			<div id=\"step-1\" class=\"step two_column\">\r\n				\r\n				<div class=\"column_one\">\r\n				dsfds\r\n				</div>\r\n				\r\n				<div class=\"column_two\">\r\n			sdfds\r\n				</div>\r\n				\r\n			</div>\r\n	\r\n			\r\n		</div>\r\n\r\n		\r\n		\r\n</div>\r\n\r\n </div>";});
 });
 window.require.register("views/templates/page/footer", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -855,7 +842,7 @@ window.require.register("views/view-controllers/home/carousel-view", function(ex
   
 });
 window.require.register("views/view-controllers/home/home-page-view", function(exports, require, module) {
-  var CarouselView, HomePageView, QuickQuoteView, ServicesView, View, mediator, template,
+  var CarouselView, HomePageView, QuickQuoteView, View, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -869,8 +856,6 @@ window.require.register("views/view-controllers/home/home-page-view", function(e
   CarouselView = require('./carousel-view');
 
   QuickQuoteView = require('views/view-controllers/home/quickQuote-view');
-
-  ServicesView = require('views/view-controllers/home/services-view');
 
   module.exports = HomePageView = (function(_super) {
 
@@ -913,10 +898,12 @@ window.require.register("views/view-controllers/home/home-page-view", function(e
     HomePageView.prototype.closeCarouselView = function(postcode) {
       var quickQuoteView;
       this.removeSubview(this.carouselView);
+      console.log("hester");
       quickQuoteView = new QuickQuoteView({
         autoRender: true,
         container: this.$("#topRow")
       });
+      console.log("gonzales");
       this.subview('quickQuoteView', quickQuoteView);
       return mediator.publish("quickQuoteViewLoad", postcode);
     };
@@ -938,7 +925,7 @@ window.require.register("views/view-controllers/home/home-page-view", function(e
   
 });
 window.require.register("views/view-controllers/home/quickQuote-view", function(exports, require, module) {
-  var QuickQuoteView, Spinner, View, denzel, mediator, template,
+  var QuickQuoteView, Spinner, View, mediator, template,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -951,23 +938,8 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
 
   Spinner = components('spin.js');
 
-  denzel = new Spinner({
-    color: '#e5e5e5',
-    lines: 13,
-    className: 'spinner',
-    length: 20,
-    width: 10,
-    radius: 30,
-    corners: 1.0,
-    rotate: 0,
-    trail: 60,
-    speed: 1.0,
-    direction: 1,
-    shadow: false
-  }).spin();
-
   module.exports = QuickQuoteView = (function(_super) {
-    var inBounds, outOfBounds, showErrorAlert,
+    var inBounds, outOfBounds, showErrorAlert, validatePostcode,
       _this = this;
 
     __extends(QuickQuoteView, _super);
@@ -992,52 +964,38 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
     };
 
     QuickQuoteView.prototype.render = function() {
-      return QuickQuoteView.__super__.render.apply(this, arguments);
+      QuickQuoteView.__super__.render.apply(this, arguments);
+      return this.$("#wizard").wizardPro();
     };
 
     QuickQuoteView.prototype.postcodeSearch = function(item) {
-      this.$('#spinner').append(denzel.el);
-      console.log(item);
       this.closeLoginErrorAlert();
-      return $.ajax({
-        url: "/api/postcode",
-        type: "post",
-        data: {
-          postcode: item
-        },
-        statusCode: {
-          422: function() {
-            return outOfBounds(item);
-          },
-          200: function() {
-            return inBounds(item);
-          },
-          502: function() {
-            return showErrorAlert("<strong>Whoops - Something has gone wrong</strong> Please try again.");
-          }
-        },
-        success: function(jqXhr, textStatus) {
-          return console.log(jqXhr);
-        },
-        error: function(jqXhr, textStatus, errorThrown) {
-          return console.log(errorThrown);
-        }
-        /*complete: ()->        
-          denzel.stop()
-        */
+      if (validatePostcode(item)) {
+        return inBounds(item);
+      } else {
+        return outOfBounds(item);
+      }
+    };
 
-      });
+    validatePostcode = function(postcode) {
+      var answer, positionOfLastTwo, removeWhite, trimStart;
+      console.log(postcode);
+      removeWhite = postcode.replace(" ", "");
+      trimStart = removeWhite.substr(2);
+      positionOfLastTwo = trimStart.length - 2;
+      answer = trimStart.substr(0, positionOfLastTwo);
+      if (answer < 110) {
+        return true;
+      } else {
+        return false;
+      }
     };
 
     outOfBounds = function(postcode) {
-      denzel.stop();
-      mediator.publish('closeQuickQuoteView', postcode);
       return console.log("out of bounds " + postcode);
     };
 
     inBounds = function(postcode) {
-      denzel.stop();
-      mediator.publish('closeQuickQuoteView', postcode);
       return console.log("in bounds " + postcode);
     };
 
@@ -1053,53 +1011,6 @@ window.require.register("views/view-controllers/home/quickQuote-view", function(
     return QuickQuoteView;
 
   }).call(this, View);
-  
-});
-window.require.register("views/view-controllers/home/services-view", function(exports, require, module) {
-  var InboundView, View, mediator, template,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  template = require('views/templates/home/services');
-
-  View = require('views/base/view');
-
-  mediator = require('mediator');
-
-  module.exports = InboundView = (function(_super) {
-
-    __extends(InboundView, _super);
-
-    function InboundView() {
-      this.whatToRender = __bind(this.whatToRender, this);
-      this.render = __bind(this.render, this);
-      this.initialize = __bind(this.initialize, this);
-      InboundView.__super__.constructor.apply(this, arguments);
-    }
-
-    InboundView.prototype.autoRender = true;
-
-    InboundView.prototype.container = '#topRow';
-
-    InboundView.prototype.template = template;
-
-    InboundView.prototype.initialize = function() {
-      InboundView.__super__.initialize.apply(this, arguments);
-      return mediator.subscribe("servicesViewLoad", this.whatToRender);
-    };
-
-    InboundView.prototype.render = function() {
-      return InboundView.__super__.render.apply(this, arguments);
-    };
-
-    InboundView.prototype.whatToRender = function(inBounds) {
-      return console.log(inBounds);
-    };
-
-    return InboundView;
-
-  })(View);
   
 });
 window.require.register("views/view-controllers/page/footer-view", function(exports, require, module) {
