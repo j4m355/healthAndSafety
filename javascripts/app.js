@@ -933,8 +933,8 @@ window.require.register("views/view-controllers/home/home-page-view", function(e
 
     HomePageView.prototype.initialize = function() {
       HomePageView.__super__.initialize.apply(this, arguments);
-      mediator.subscribe("closeCarouselView", this.closeCarouselView);
-      return mediator.subscribe("closeQuickQuoteView", this.closeQuickQuoteView);
+      this.subscribeEvent("closeCarouselView", this.closeCarouselView);
+      return this.subscribeEvent("closeQuickQuoteView", this.closeQuickQuoteView);
     };
 
     HomePageView.prototype.render = function() {
